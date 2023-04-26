@@ -647,10 +647,8 @@
     <span class="n">mask_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">type_as</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span>
     <span class="n">mask_neg</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">type_as</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span>
 
-    <span class="c1"># create output pose matrix</span>
-    <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">eye_like</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">angle_axis</span><span class="p">,</span> <span class="n">shared_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="c1"># fill output matrix with masked values</span>
-    <span class="n">rotation_matrix</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask_pos</span> <span class="o">*</span> <span class="n">rotation_matrix_normal</span> <span class="o">+</span> <span class="n">mask_neg</span> <span class="o">*</span> <span class="n">rotation_matrix_taylor</span>
+    <span class="c1"># create output pose matrix with masked values</span>
+    <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">mask_pos</span> <span class="o">*</span> <span class="n">rotation_matrix_normal</span> <span class="o">+</span> <span class="n">mask_neg</span> <span class="o">*</span> <span class="n">rotation_matrix_taylor</span>
     <span class="k">return</span> <span class="n">rotation_matrix</span>  <span class="c1"># Nx3x3</span></div>
 
 

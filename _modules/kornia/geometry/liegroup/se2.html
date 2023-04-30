@@ -311,7 +311,9 @@
           <h1>Source code for kornia.geometry.liegroup.se2</h1><div class="highlight"><pre>
 <span></span><span class="c1"># kornia.geometry.se2 module inspired by Sophus-sympy.</span>
 <span class="c1"># https://github.com/strasdat/Sophus/blob/master/sympy/sophus/se2.py</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">overload</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">overload</span>
 
 <span class="kn">from</span> <span class="nn">kornia.core</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Device</span><span class="p">,</span>
@@ -330,6 +332,7 @@
 <span class="kn">from</span> <span class="nn">kornia.core.check</span> <span class="kn">import</span> <span class="n">KORNIA_CHECK</span><span class="p">,</span> <span class="n">KORNIA_CHECK_SAME_DEVICES</span><span class="p">,</span> <span class="n">KORNIA_CHECK_TYPE</span>
 <span class="kn">from</span> <span class="nn">kornia.geometry.liegroup._utils</span> <span class="kn">import</span> <span class="n">check_se2_omega_shape</span><span class="p">,</span> <span class="n">check_se2_r_t_shape</span><span class="p">,</span> <span class="n">check_v_shape</span>
 <span class="kn">from</span> <span class="nn">kornia.geometry.liegroup.so2</span> <span class="kn">import</span> <span class="n">So2</span>
+<span class="kn">from</span> <span class="nn">kornia.geometry.vector</span> <span class="kn">import</span> <span class="n">Vector2</span>
 
 
 <div class="viewcode-block" id="Se2"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2">[docs]</a><span class="k">class</span> <span class="nc">Se2</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
@@ -350,7 +353,7 @@
 <span class="sd">        tensor([[1., 1.]], requires_grad=True)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Se2.__init__"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rotation</span><span class="p">:</span> <span class="n">So2</span><span class="p">,</span> <span class="n">translation</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Se2.__init__"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rotation</span><span class="p">:</span> <span class="n">So2</span><span class="p">,</span> <span class="n">translation</span><span class="p">:</span> <span class="n">Vector2</span> <span class="o">|</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor for the base class.</span>
 
 <span class="sd">        Internally represented by a complex number `z` and a translation 2-vector.</span>
@@ -372,18 +375,25 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">KORNIA_CHECK_TYPE</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">So2</span><span class="p">)</span>
         <span class="c1"># TODO change to KORNIA_CHECK_SHAPE once there is multiple shape support</span>
-        <span class="n">check_se2_r_t_shape</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">translation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span> <span class="o">=</span> <span class="n">rotation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_translation</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span></div>
+        <span class="c1"># KORNIA_CHECK_TYPE(translation, (Vector3, Tensor))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">translation</span><span class="p">,</span> <span class="p">(</span><span class="n">Vector2</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;translation type is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_translation</span><span class="p">:</span> <span class="n">Vector2</span> <span class="o">|</span> <span class="n">Parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span><span class="p">:</span> <span class="n">So2</span> <span class="o">=</span> <span class="n">rotation</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">translation</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">):</span>
+            <span class="n">check_se2_r_t_shape</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">translation</span><span class="p">)</span>  <span class="c1"># TODO remove</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_translation</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_translation</span> <span class="o">=</span> <span class="n">translation</span></div>
 
 <div class="viewcode-block" id="Se2.__repr__"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;rotation: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="si">}</span><span class="se">\n</span><span class="s2">translation: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span></div>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">slice</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Se2&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">slice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Se2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translation</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
 
     <span class="nd">@overload</span>
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Se2&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Se2&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Se2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
         <span class="o">...</span>
 
     <span class="nd">@overload</span>
@@ -406,10 +416,9 @@
             <span class="n">_r</span> <span class="o">=</span> <span class="n">so2</span> <span class="o">*</span> <span class="n">right</span><span class="o">.</span><span class="n">so2</span>
             <span class="n">_t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">so2</span> <span class="o">*</span> <span class="n">right</span><span class="o">.</span><span class="n">t</span>
             <span class="k">return</span> <span class="n">Se2</span><span class="p">(</span><span class="n">_r</span><span class="p">,</span> <span class="n">_t</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">KORNIA_CHECK_TYPE</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="p">(</span><span class="n">Vector2</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">)):</span>
             <span class="c1"># TODO change to KORNIA_CHECK_SHAPE once there is multiple shape support</span>
-            <span class="n">check_se2_r_t_shape</span><span class="p">(</span><span class="n">so2</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+            <span class="c1"># check_se2_r_t_shape(so2, risght)</span>
             <span class="k">return</span> <span class="n">so2</span> <span class="o">*</span> <span class="n">right</span> <span class="o">+</span> <span class="n">t</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
@@ -425,7 +434,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">t</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">t</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector2</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the underlying translation vector of shape :math:`(B,2)`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translation</span>
 
@@ -435,12 +444,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">translation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">translation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector2</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the underlying translation vector of shape :math:`(B,2)`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translation</span>
 
 <div class="viewcode-block" id="Se2.exp"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.exp">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Se2&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts elements of lie algebra to elements of lie group.</span>
 
 <span class="sd">        Args:</span>
@@ -486,7 +495,7 @@
         <span class="n">row0</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">half_theta</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">row1</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="o">-</span><span class="n">half_theta</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">V_inv</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="n">row0</span><span class="p">,</span> <span class="n">row1</span><span class="p">),</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">upsilon</span> <span class="o">=</span> <span class="n">V_inv</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">upsilon</span> <span class="o">=</span> <span class="n">V_inv</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">stack</span><span class="p">((</span><span class="n">upsilon</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">upsilon</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">theta</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Se2.hat"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.hat">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -532,7 +541,7 @@
         <span class="k">return</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">upsilon</span><span class="p">,</span> <span class="n">theta</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Se2.identity"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.identity">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Device</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Se2&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Se2 group representing an identity rotation and zero translation.</span>
 
 <span class="sd">        Args:</span>
@@ -544,14 +553,14 @@
 <span class="sd">            Parameter containing:</span>
 <span class="sd">            tensor([1.+0.j], requires_grad=True)</span>
 <span class="sd">            &gt;&gt;&gt; s.t</span>
-<span class="sd">            Parameter containing:</span>
-<span class="sd">            tensor([[0., 0.]], requires_grad=True)</span>
+<span class="sd">            x: tensor([0.])</span>
+<span class="sd">            y: tensor([0.])</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t</span><span class="p">:</span> <span class="n">Tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">batch_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">KORNIA_CHECK</span><span class="p">(</span><span class="n">batch_size</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;batch_size must be positive&quot;</span><span class="p">)</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">So2</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">So2</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="n">t</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Se2.matrix"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.matrix">[docs]</a>    <span class="k">def</span> <span class="nf">matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the matrix representation of shape :math:`(B, 3, 3)`.</span>
@@ -563,12 +572,12 @@
 <span class="sd">                     [0., 1., 1.],</span>
 <span class="sd">                     [0., 0., 1.]]], grad_fn=&lt;CopySlices&gt;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">rt</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">matrix</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">rt</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">matrix</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">rt_3x3</span> <span class="o">=</span> <span class="n">pad</span><span class="p">(</span><span class="n">rt</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># add last row zeros</span>
         <span class="n">rt_3x3</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="k">return</span> <span class="n">rt_3x3</span></div>
 
-<div class="viewcode-block" id="Se2.inverse"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Se2&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="Se2.inverse"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the inverse transformation.</span>
 
 <span class="sd">        Example:</span>
@@ -586,7 +595,7 @@
         <span class="k">return</span> <span class="n">Se2</span><span class="p">(</span><span class="n">r_inv</span><span class="p">,</span> <span class="n">t_inv</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Se2.random"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.random">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Device</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Se2&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Se2 group representing a random transformation.</span>
 
 <span class="sd">        Args:</span>
@@ -597,16 +606,16 @@
 <span class="sd">            &gt;&gt;&gt; s = Se2.random(batch_size=3)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">So2</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
-        <span class="n">shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="n">shape</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">batch_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">KORNIA_CHECK</span><span class="p">(</span><span class="n">batch_size</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;batch_size must be positive&quot;</span><span class="p">)</span>
             <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rand</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Vector2</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="Se2.trans"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.trans">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Se2&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a translation only Se2 instance.</span>
 
 <span class="sd">        Args:</span>
@@ -620,7 +629,7 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">stack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Se2.trans_x"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.trans_x">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">trans_x</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Se2&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">trans_x</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a x-axis translation.</span>
 
 <span class="sd">        Args:</span>
@@ -630,7 +639,7 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">zs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Se2.trans_y"><a class="viewcode-back" href="../../../../geometry.liegroup.html#kornia.geometry.liegroup.Se2.trans_y">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">trans_y</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Se2&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">trans_y</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Se2</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a y-axis translation.</span>
 
 <span class="sd">        Args:</span>
@@ -650,7 +659,7 @@
 <span class="sd">                    [0., 0., 1.]], grad_fn=&lt;CopySlices&gt;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
-        <span class="n">rt</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">rt</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rt</span></div></div>
 </pre></div>
         </article>

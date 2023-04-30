@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Kornia 社区" href="../community/chinese.html" /><link rel="prev" title="Dexined (edge detection)" href="dexined.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="YuNet" href="yunet.html" /><link rel="prev" title="Semantic segmentation" href="../applications/semantic_segmentation.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/models/segment_anything.html" />
 
     <link rel="shortcut icon" href="../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
@@ -236,6 +236,7 @@
 <p class="caption" role="heading"><span class="caption-text">KORNIA APPLICATIONS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../applications/intro.html">Computer Vision Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/visual_prompting.html">Visual Prompting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications/face_detection.html">Face Detection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications/image_augmentations.html">Image Augmentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications/image_classification.html">Image Classification</a></li>
@@ -247,6 +248,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">KORNIA MODELS</span></p>
 <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Segment Anything (SAM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="yunet.html">YuNet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vit.html">Vision Transformer (ViT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vit_mobile.html">MobileViT</a></li>
@@ -256,7 +258,6 @@
 <li class="toctree-l1"><a class="reference internal" href="affnet.html">Affnet (detection)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sold2.html">SOLD2 (Line detection and matching)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dexined.html">Dexined (edge detection)</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Segment Anything (SAM)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
 <ul>
@@ -318,7 +319,7 @@ can be used to generate masks for all objects in an image.</p>
 <p class="sd-card-text"><strong>Segment Anything</strong></p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text"><strong>Abstract:</strong> We introduce the Segment Anything (SA) project: a new task, model, and dataset for image
+<p class="sd-card-text"><strong>Abstract:</strong> We introduce the Segment Anything (SAM) project: a new task, model, and dataset for image
 segmentation. Using our efficient model in a data collection loop, we built the largest segmentation
 dataset to date (by far), with over 1 billion masks on 11M licensed and privacy respecting images. The
 model is designed and trained to be promptable, so it can transfer zero-shot to new image distributions
@@ -338,20 +339,20 @@ Gustafson and Alex Berg and Wan-Yen Lo and Piotr Dollar and Ross Girshick</p>
 <section id="how-to-use-sam-from-kornia">
 <h2>How to use SAM from Kornia<a class="headerlink" href="#how-to-use-sam-from-kornia" title="Permalink to this heading">#</a></h2>
 <p>The Kornia API for SAM try to provide a simple API to access initialize the model and load/download the weights. Also,
-providing it to a high-level API called <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code>, which allow the users to set an image and run multiple
+providing it to a high-level API called <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code>, which allow the users to set an image and run multiple
 queries multiple times.</p>
-<p>The <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code> works querying on a single image, if you want to explore and query into a batch of images,
+<p>The <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code> works querying on a single image, if you want to explore and query into a batch of images,
 you can use the <code class="code docutils literal notranslate"><span class="pre">Sam</span></code> directly. But, for it you will need to write the boilerplate to preprocess and postprocess to
-use it. This boilerplate, is already handle on the high-level API <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code>.</p>
+use it. This boilerplate, is already handle on the high-level API <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code>.</p>
 <section id="image-prompter">
 <h3>Image Prompter<a class="headerlink" href="#image-prompter" title="Permalink to this heading">#</a></h3>
-<p id="anchor-prompter">The High level API <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code> handle with the image and prompt transformation, preprocessing and prediction for
+<p id="anchor-prompter">The High level API <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code> handle with the image and prompt transformation, preprocessing and prediction for
 a given SAM model.</p>
-<p>About the <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code>:</p>
+<p>About the <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code>:</p>
 <ol class="arabic">
 <li><p>From a <cite>ModelConfig</cite> loads the desired model with the desired checkpoint to be used as the model to receive the query
 prompts. For know we just support Segment Anything model, where the <em>SAM-h</em> is the default option.</p></li>
-<li><p>Based on the model, the <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code> will handle with the necessary transformations to be done into the image
+<li><p>Based on the model, the <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code> will handle with the necessary transformations to be done into the image
 and prompts before apply it to the model. These transformations are done using PyTorch backed, by our API of
 augmentations. Where we use the <code class="xref py py-class docutils literal notranslate"><span class="pre">kornia.geometry.augmentation.AugmentationSequential</span></code> to handle with the different
 data formats (keypoints, boxes, masks, image).</p></li>
@@ -382,14 +383,14 @@ we provide the method <code class="code docutils literal notranslate"><span clas
 prompter itself.</p></li>
 </ol>
 <hr class="docutils" />
-<p>Example of using the <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code>:</p>
-<p>Exploring how to simple initialize the <code class="code docutils literal notranslate"><span class="pre">ImagePrompter</span></code>, automatically load the weights from a URL,
+<p>Example of using the <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code>:</p>
+<p>Exploring how to simple initialize the <code class="code docutils literal notranslate"><span class="pre">VisualPrompter</span></code>, automatically load the weights from a URL,
 read the image and set it to be query, how to write the prompts, and the multiple ways we can use these prompts
 to query the image masks from the SAM model.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
 <span class="kn">from</span> <span class="nn">kornia.contrib.models.sam</span> <span class="kn">import</span> <span class="n">SamConfig</span>
-<span class="kn">from</span> <span class="nn">kornia.contrib.image_prompter</span> <span class="kn">import</span> <span class="n">ImagePrompter</span>
+<span class="kn">from</span> <span class="nn">kornia.contrib.visual_prompter</span> <span class="kn">import</span> <span class="n">VisualPrompter</span>
 <span class="kn">from</span> <span class="nn">kornia.io</span> <span class="kn">import</span> <span class="n">load_image</span><span class="p">,</span> <span class="n">ImageLoadType</span>
 <span class="kn">from</span> <span class="nn">kornia.geometry.keypoints</span> <span class="kn">import</span> <span class="n">Keypoints</span>
 <span class="kn">from</span> <span class="nn">kornia.geometry.boxes</span> <span class="kn">import</span> <span class="n">Boxes</span>
@@ -406,7 +407,7 @@ to query the image masks from the SAM model.</p>
 <span class="n">config</span> <span class="o">=</span> <span class="n">SamConfig</span><span class="p">(</span><span class="n">model_type</span><span class="p">,</span> <span class="n">checkpoint</span><span class="p">)</span>
 
 <span class="c1"># Load the prompter</span>
-<span class="n">prompter</span> <span class="o">=</span> <span class="n">ImagePrompter</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">prompter</span> <span class="o">=</span> <span class="n">VisualPrompter</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 
 <span class="c1"># You can use torch dynamo/compile API with:</span>
 <span class="c1"># prompter.compile()</span>
@@ -602,23 +603,23 @@ parameters. If a checkpoint URL or path for a file is seted, the method will aut
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../community/chinese.html">
+          <a class="next-page" href="yunet.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Kornia 社区</div>
+                <div class="title">YuNet</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="dexined.html">
+          <a class="prev-page" href="../applications/semantic_segmentation.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Dexined (edge detection)</div>
+                <div class="title">Semantic segmentation</div>
                 
               </div>
             </a>

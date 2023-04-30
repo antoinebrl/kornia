@@ -234,6 +234,7 @@
 <p class="caption" role="heading"><span class="caption-text">KORNIA APPLICATIONS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="applications/intro.html">Computer Vision Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications/visual_prompting.html">Visual Prompting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/face_detection.html">Face Detection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/image_augmentations.html">Image Augmentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/image_classification.html">Image Classification</a></li>
@@ -245,6 +246,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">KORNIA MODELS</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="models/segment_anything.html">Segment Anything (SAM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/yunet.html">YuNet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit.html">Vision Transformer (ViT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit_mobile.html">MobileViT</a></li>
@@ -254,7 +256,6 @@
 <li class="toctree-l1"><a class="reference internal" href="models/affnet.html">Affnet (detection)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/sold2.html">SOLD2 (Line detection and matching)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/dexined.html">Dexined (edge detection)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="models/segment_anything.html">Segment Anything (SAM)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
 <ul>
@@ -627,10 +628,10 @@
 </li>
         <li><a href="contrib.html#kornia.contrib.CombineTensorPatches">CombineTensorPatches (class in kornia.contrib)</a>
 </li>
-        <li><a href="contrib.html#kornia.contrib.image_prompter.ImagePrompter.compile">compile() (kornia.contrib.image_prompter.ImagePrompter method)</a>
+        <li><a href="contrib.html#kornia.contrib.models.base.ModelBase.compile">compile() (kornia.contrib.models.base.ModelBase method)</a>
 
         <ul>
-          <li><a href="contrib.html#kornia.contrib.models.base.ModelBase.compile">(kornia.contrib.models.base.ModelBase method)</a>
+          <li><a href="contrib.html#kornia.contrib.visual_prompter.VisualPrompter.compile">(kornia.contrib.visual_prompter.VisualPrompter method)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -1261,8 +1262,6 @@
 </li>
         <li><a href="io.html#kornia.io.ImageLoadType">ImageLoadType (class in kornia.io)</a>
 </li>
-        <li><a href="contrib.html#kornia.contrib.image_prompter.ImagePrompter">ImagePrompter (class in kornia.contrib.image_prompter)</a>
-</li>
         <li><a href="geometry.transform.html#kornia.geometry.transform.image_registrator.ImageRegistrator">ImageRegistrator (class in kornia.geometry.transform.image_registrator)</a>
 </li>
         <li><a href="augmentation.container.html#kornia.augmentation.container.ImageSequential">ImageSequential (class in kornia.augmentation.container)</a>
@@ -1279,10 +1278,10 @@
 </li>
         <li><a href="geometry.line.html#kornia.geometry.line.ParametrizedLine.intersect">intersect() (kornia.geometry.line.ParametrizedLine method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.intrinsics">intrinsics (kornia.geometry.camera.pinhole.PinholeCamera property)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.intrinsics_inverse">intrinsics_inverse() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
 </li>
         <li><a href="geometry.epipolar.html#kornia.geometry.epipolar.intrinsics_like">intrinsics_like() (in module kornia.geometry.epipolar)</a>
@@ -1725,11 +1724,11 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="enhance.html#kornia.enhance.posterize">posterize() (in module kornia.enhance)</a>
 </li>
-        <li><a href="contrib.html#kornia.contrib.image_prompter.ImagePrompter.predict">predict() (kornia.contrib.image_prompter.ImagePrompter method)</a>
+        <li><a href="contrib.html#kornia.contrib.visual_prompter.VisualPrompter.predict">predict() (kornia.contrib.visual_prompter.VisualPrompter method)</a>
 </li>
-        <li><a href="contrib.html#kornia.contrib.image_prompter.ImagePrompter.preprocess_image">preprocess_image() (kornia.contrib.image_prompter.ImagePrompter method)</a>
+        <li><a href="contrib.html#kornia.contrib.visual_prompter.VisualPrompter.preprocess_image">preprocess_image() (kornia.contrib.visual_prompter.VisualPrompter method)</a>
 </li>
-        <li><a href="contrib.html#kornia.contrib.image_prompter.ImagePrompter.preprocess_prompts">preprocess_prompts() (kornia.contrib.image_prompter.ImagePrompter method)</a>
+        <li><a href="contrib.html#kornia.contrib.visual_prompter.VisualPrompter.preprocess_prompts">preprocess_prompts() (kornia.contrib.visual_prompter.VisualPrompter method)</a>
 </li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.project">project() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
 </li>
@@ -2139,7 +2138,7 @@
 </li>
         <li><a href="color.html#kornia.color.sepia">sepia() (in module kornia.color)</a>
 </li>
-        <li><a href="contrib.html#kornia.contrib.image_prompter.ImagePrompter.set_image">set_image() (kornia.contrib.image_prompter.ImagePrompter method)</a>
+        <li><a href="contrib.html#kornia.contrib.visual_prompter.VisualPrompter.set_image">set_image() (kornia.contrib.visual_prompter.VisualPrompter method)</a>
 </li>
         <li><a href="feature.html#kornia.feature.set_laf_orientation">set_laf_orientation() (in module kornia.feature)</a>
 </li>
@@ -2460,6 +2459,8 @@
         <li><a href="augmentation.container.html#kornia.augmentation.container.VideoSequential">VideoSequential (class in kornia.augmentation.container)</a>
 </li>
         <li><a href="contrib.html#kornia.contrib.VisionTransformer">VisionTransformer (class in kornia.contrib)</a>
+</li>
+        <li><a href="contrib.html#kornia.contrib.visual_prompter.VisualPrompter">VisualPrompter (class in kornia.contrib.visual_prompter)</a>
 </li>
         <li><a href="contrib.html#kornia.contrib.models.sam.SamModelType.vit_b">vit_b (kornia.contrib.models.sam.SamModelType attribute)</a>
 </li>

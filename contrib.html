@@ -236,6 +236,7 @@
 <p class="caption" role="heading"><span class="caption-text">KORNIA APPLICATIONS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="applications/intro.html">Computer Vision Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications/visual_prompting.html">Visual Prompting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/face_detection.html">Face Detection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/image_augmentations.html">Image Augmentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/image_classification.html">Image Classification</a></li>
@@ -247,6 +248,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">KORNIA MODELS</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="models/segment_anything.html">Segment Anything (SAM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/yunet.html">YuNet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit.html">Vision Transformer (ViT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit_mobile.html">MobileViT</a></li>
@@ -256,7 +258,6 @@
 <li class="toctree-l1"><a class="reference internal" href="models/affnet.html">Affnet (detection)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/sold2.html">SOLD2 (Line detection and matching)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/dexined.html">Dexined (edge detection)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="models/segment_anything.html">Segment Anything (SAM)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
 <ul>
@@ -488,11 +489,11 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 
 </section>
 </section>
-<section id="imageprompter">
-<h2>ImagePrompter<a class="headerlink" href="#imageprompter" title="Permalink to this heading">#</a></h2>
+<section id="visualprompter">
+<h2>VisualPrompter<a class="headerlink" href="#visualprompter" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="kornia.contrib.image_prompter.ImagePrompter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.contrib.image_prompter.</span></span><span class="sig-name descname"><span class="pre">ImagePrompter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SamConfig(model_type='vit_h',</span> <span class="pre">checkpoint='https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/image_prompter.html#ImagePrompter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.image_prompter.ImagePrompter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="kornia.contrib.visual_prompter.VisualPrompter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.contrib.visual_prompter.</span></span><span class="sig-name descname"><span class="pre">VisualPrompter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SamConfig(model_type='vit_h',</span> <span class="pre">checkpoint='https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/visual_prompter.html#VisualPrompter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.visual_prompter.VisualPrompter" title="Permalink to this definition">#</a></dt>
 <dd><p>This class allow the user to run multiple query with multiple prompts for a model.</p>
 <p>At the moment, we just support the SAM model. The model is loaded based on the given config.</p>
 <p>For default the images are transformed to have their long side with size of the <cite>image_encoder.img_size</cite>. This
@@ -513,9 +514,9 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># prompter = ImagePrompter() # Will load the vit h for default</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># prompter = VisualPrompter() # Will load the vit h for default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># You can load a custom SAM type for modifying the config</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prompter</span> <span class="o">=</span> <span class="n">ImagePrompter</span><span class="p">(</span><span class="n">SamConfig</span><span class="p">(</span><span class="s1">&#39;vit_b&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompter</span> <span class="o">=</span> <span class="n">VisualPrompter</span><span class="p">(</span><span class="n">SamConfig</span><span class="p">(</span><span class="s1">&#39;vit_b&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prompter</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">boxes</span> <span class="o">=</span> <span class="n">Boxes</span><span class="p">(</span>
@@ -532,9 +533,9 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="kornia.contrib.image_prompter.ImagePrompter.compile">
-<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullgraph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inductor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/image_prompter.html#ImagePrompter.compile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.image_prompter.ImagePrompter.compile" title="Permalink to this definition">#</a></dt>
-<dd><p>Applies <cite>torch.compile(…)</cite>/dynamo API into the ImagePrompter API.</p>
+<dt class="sig sig-object py" id="kornia.contrib.visual_prompter.VisualPrompter.compile">
+<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullgraph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inductor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/visual_prompter.html#VisualPrompter.compile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.visual_prompter.VisualPrompter.compile" title="Permalink to this definition">#</a></dt>
+<dd><p>Applies <cite>torch.compile(…)</cite>/dynamo API into the VisualPrompter API.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For more information about the dynamo API check the official docs
@@ -562,7 +563,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Fals
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># prompter = ImagePrompter()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># prompter = VisualPrompter()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># prompter.compile() # You should have torch &gt;= 2.0.0 installed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use the prompter methods ...</span>
 </pre></div>
@@ -570,8 +571,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Fals
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="kornia.contrib.image_prompter.ImagePrompter.predict">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keypoints_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multimask_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_original_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/image_prompter.html#ImagePrompter.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.image_prompter.ImagePrompter.predict" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="kornia.contrib.visual_prompter.VisualPrompter.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keypoints_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multimask_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_original_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/visual_prompter.html#VisualPrompter.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.visual_prompter.VisualPrompter.predict" title="Permalink to this definition">#</a></dt>
 <dd><p>Predict masks for the given image based on the input prompts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -608,8 +609,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="kornia.contrib.image_prompter.ImagePrompter.preprocess_image">
-<span class="sig-name descname"><span class="pre">preprocess_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/image_prompter.html#ImagePrompter.preprocess_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.image_prompter.ImagePrompter.preprocess_image" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="kornia.contrib.visual_prompter.VisualPrompter.preprocess_image">
+<span class="sig-name descname"><span class="pre">preprocess_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/visual_prompter.html#VisualPrompter.preprocess_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.visual_prompter.VisualPrompter.preprocess_image" title="Permalink to this definition">#</a></dt>
 <dd><p>Normalize and pad a tensor.</p>
 <p>For normalize the tensor: will priorize the <cite>mean</cite> and <cite>std</cite> passed as argument, if None will use the default
 Sam Dataset values.</p>
@@ -635,8 +636,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="kornia.contrib.image_prompter.ImagePrompter.preprocess_prompts">
-<span class="sig-name descname"><span class="pre">preprocess_prompts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keypoints_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/image_prompter.html#ImagePrompter.preprocess_prompts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.image_prompter.ImagePrompter.preprocess_prompts" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="kornia.contrib.visual_prompter.VisualPrompter.preprocess_prompts">
+<span class="sig-name descname"><span class="pre">preprocess_prompts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keypoints_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/visual_prompter.html#VisualPrompter.preprocess_prompts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.visual_prompter.VisualPrompter.preprocess_prompts" title="Permalink to this definition">#</a></dt>
 <dd><p>Validate and preprocess the given prompts to be aligned with the input image.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -646,8 +647,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="kornia.contrib.image_prompter.ImagePrompter.set_image">
-<span class="sig-name descname"><span class="pre">set_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/image_prompter.html#ImagePrompter.set_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.image_prompter.ImagePrompter.set_image" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="kornia.contrib.visual_prompter.VisualPrompter.set_image">
+<span class="sig-name descname"><span class="pre">set_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/visual_prompter.html#VisualPrompter.set_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.visual_prompter.VisualPrompter.set_image" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the embeddings from the given image with <cite>image_decoder</cite> of the model.</p>
 <p>Prepare the given image with the selected transforms and the preprocess method.</p>
 <dl class="field-list simple">
@@ -1698,13 +1699,13 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">0.35
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#imageprompter">ImagePrompter</a><ul>
-<li><a class="reference internal" href="#kornia.contrib.image_prompter.ImagePrompter"><code class="docutils literal notranslate"><span class="pre">ImagePrompter</span></code></a><ul>
-<li><a class="reference internal" href="#kornia.contrib.image_prompter.ImagePrompter.compile"><code class="docutils literal notranslate"><span class="pre">ImagePrompter.compile()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.contrib.image_prompter.ImagePrompter.predict"><code class="docutils literal notranslate"><span class="pre">ImagePrompter.predict()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.contrib.image_prompter.ImagePrompter.preprocess_image"><code class="docutils literal notranslate"><span class="pre">ImagePrompter.preprocess_image()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.contrib.image_prompter.ImagePrompter.preprocess_prompts"><code class="docutils literal notranslate"><span class="pre">ImagePrompter.preprocess_prompts()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.contrib.image_prompter.ImagePrompter.set_image"><code class="docutils literal notranslate"><span class="pre">ImagePrompter.set_image()</span></code></a></li>
+<li><a class="reference internal" href="#visualprompter">VisualPrompter</a><ul>
+<li><a class="reference internal" href="#kornia.contrib.visual_prompter.VisualPrompter"><code class="docutils literal notranslate"><span class="pre">VisualPrompter</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.contrib.visual_prompter.VisualPrompter.compile"><code class="docutils literal notranslate"><span class="pre">VisualPrompter.compile()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.visual_prompter.VisualPrompter.predict"><code class="docutils literal notranslate"><span class="pre">VisualPrompter.predict()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.visual_prompter.VisualPrompter.preprocess_image"><code class="docutils literal notranslate"><span class="pre">VisualPrompter.preprocess_image()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.visual_prompter.VisualPrompter.preprocess_prompts"><code class="docutils literal notranslate"><span class="pre">VisualPrompter.preprocess_prompts()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.visual_prompter.VisualPrompter.set_image"><code class="docutils literal notranslate"><span class="pre">VisualPrompter.set_image()</span></code></a></li>
 </ul>
 </li>
 </ul>

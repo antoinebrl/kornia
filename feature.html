@@ -1854,16 +1854,16 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 <dl class="py function">
 <dt class="sig sig-object py" id="kornia.feature.normalize_laf">
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">normalize_laf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LAF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/laf.html#normalize_laf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.normalize_laf" title="Permalink to this definition">#</a></dt>
-<dd><dl class="simple">
-<dt>Normalize LAFs to [0,1] scale from pixel scale. See below:</dt><dd><p>B,N,H,W = images.size()
+<dd><p>Normalize LAFs to [0,1] scale from pixel scale. See below:</p>
+<blockquote>
+<div><p>B,N,H,W = images.size()
 MIN_SIZE =  min(H - 1, W -1)
 [a11 a21 x]
 [a21 a22 y]
 becomes:
 [a11/MIN_SIZE a21/MIN_SIZE x/(W-1)]
 [a21/MIN_SIZE a22/MIN_SIZE y/(H-1)]</p>
-</dd>
-</dl>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

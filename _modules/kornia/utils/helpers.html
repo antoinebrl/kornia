@@ -347,7 +347,7 @@
     <span class="k">return</span> <span class="n">dev</span></div>
 
 
-<span class="k">def</span> <span class="nf">get_mps_device_if_available</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">:</span>
+<div class="viewcode-block" id="get_mps_device_if_available"><a class="viewcode-back" href="../../../utils.html#kornia.utils.get_mps_device_if_available">[docs]</a><span class="k">def</span> <span class="nf">get_mps_device_if_available</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Tries to get mps device, if fail, returns cpu.</span>
 
 <span class="sd">    Returns:</span>
@@ -357,10 +357,10 @@
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="p">,</span> <span class="s1">&#39;mps&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
             <span class="n">dev</span> <span class="o">=</span> <span class="s1">&#39;mps&#39;</span>
-    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">get_cuda_or_mps_device_if_available</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">:</span>
+<div class="viewcode-block" id="get_cuda_or_mps_device_if_available"><a class="viewcode-back" href="../../../utils.html#kornia.utils.get_cuda_or_mps_device_if_available">[docs]</a><span class="k">def</span> <span class="nf">get_cuda_or_mps_device_if_available</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks OS and platform and runs get_cuda_device_if_available or get_mps_device_if_available.</span>
 
 <span class="sd">    Returns:</span>
@@ -369,7 +369,7 @@
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span> <span class="ow">and</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;arm64&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">get_mps_device_if_available</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">get_cuda_device_if_available</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">get_cuda_device_if_available</span><span class="p">()</span></div>
 
 
 <span class="nd">@overload</span>

@@ -488,7 +488,7 @@
         <span class="n">fmaps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backbone</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
         <span class="n">fmaps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">neck</span><span class="p">(</span><span class="n">fmaps</span><span class="p">)</span>
         <span class="n">logits</span><span class="p">,</span> <span class="n">boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">fmaps</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">logits</span><span class="o">=</span><span class="n">logits</span><span class="p">,</span> <span class="n">boxes</span><span class="o">=</span><span class="n">boxes</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;logits&quot;</span><span class="p">:</span> <span class="n">logits</span><span class="p">,</span> <span class="s2">&quot;boxes&quot;</span><span class="p">:</span> <span class="n">boxes</span><span class="p">}</span></div></div>
 </pre></div>
         </article>
       </div>

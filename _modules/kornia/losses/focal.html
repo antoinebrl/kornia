@@ -320,7 +320,7 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 
 <span class="kn">from</span> <span class="nn">kornia.core</span> <span class="kn">import</span> <span class="n">Tensor</span>
 <span class="kn">from</span> <span class="nn">kornia.core.check</span> <span class="kn">import</span> <span class="n">KORNIA_CHECK</span><span class="p">,</span> <span class="n">KORNIA_CHECK_IS_TENSOR</span><span class="p">,</span> <span class="n">KORNIA_CHECK_SHAPE</span>
@@ -346,7 +346,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        input: logits tensor with shape :math:`(N, C, *)` where C = number of classes.</span>
-<span class="sd">        target: labels tensor with shape :math:`(N, *)` where each value is :math:`0 ≤ targets[i] ≤ C−1`.</span>
+<span class="sd">        target: labels tensor with shape :math:`(N, *)` where each value is :math:`0 ≤ targets[i] ≤ C-1`.</span>
 <span class="sd">        alpha: Weighting factor :math:`\alpha \in [0, 1]`.</span>
 <span class="sd">        gamma: Focusing parameter :math:`\gamma &gt;= 0`.</span>
 <span class="sd">        reduction: Specifies the reduction to apply to the</span>
@@ -435,7 +435,7 @@
 <span class="sd">    Shape:</span>
 <span class="sd">        - Input: :math:`(N, C, *)` where C = number of classes.</span>
 <span class="sd">        - Target: :math:`(N, *)` where each value is</span>
-<span class="sd">          :math:`0 ≤ targets[i] ≤ C−1`.</span>
+<span class="sd">          :math:`0 ≤ targets[i] ≤ C-1`.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; N = 5  # num_classes</span>
@@ -488,7 +488,7 @@
 <span class="sd">          summed.</span>
 <span class="sd">        eps: Deprecated: scalar for numerically stability when dividing. This is no longer used.</span>
 <span class="sd">        pos_weight: a weight of positive examples.</span>
-<span class="sd">          It’s possible to trade off recall and precision by adding weights to positive examples.</span>
+<span class="sd">          It`s possible to trade off recall and precision by adding weights to positive examples.</span>
 <span class="sd">          Must be a vector with length equal to the number of classes.</span>
 
 <span class="sd">    Returns:</span>
@@ -565,7 +565,7 @@
 <span class="sd">          the number of elements in the output, ``&#39;sum&#39;``: the output will be</span>
 <span class="sd">          summed.</span>
 <span class="sd">        pos_weight: a weight of positive examples.</span>
-<span class="sd">          It’s possible to trade off recall and precision by adding weights to positive examples.</span>
+<span class="sd">          It`s possible to trade off recall and precision by adding weights to positive examples.</span>
 <span class="sd">          Must be a vector with length equal to the number of classes.</span>
 
 <span class="sd">    Shape:</span>

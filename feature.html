@@ -1285,9 +1285,9 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">0.8<
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>desc_dim</strong> (<em>optional</em>) – The dimension of the descriptor.
+<li><p><strong>desc_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The dimension of the descriptor.
 Default:  <code class="code docutils literal notranslate"><span class="pre">128</span></code></p></li>
-<li><p><strong>unet</strong> (<em>optional</em>) – The U-Net to use. If None, a default U-Net is used. Kornia doesn’t provide the training code for DISK
+<li><p><strong>unet</strong> (<em>None</em><em> | </em><em>Module</em><em>, </em><em>optional</em>) – The U-Net to use. If None, a default U-Net is used. Kornia doesn’t provide the training code for DISK
 so this is only useful when using a custom checkpoint trained using the code released with the paper.
 The unet should take as input a tensor of shape <span class="math notranslate nohighlight">\((B, C, H, W)\)</span> and output a tensor of shape
 <span class="math notranslate nohighlight">\((B, \mathrm{desc\_dim} + 1, H, W)\)</span>.
@@ -1753,9 +1753,9 @@ Feature Matching with Transformers”. See <span id="id13">[<a class="reference 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>], <em>optional</em>) – Dict with initiliazation parameters. Do not pass it, unless you know what you are doing`.
+<li><p><strong>config</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>, </em><em>optional</em>) – Dict with initiliazation parameters. Do not pass it, unless you know what you are doing`.
 Default:  <code class="code docutils literal notranslate"><span class="pre">default_cfg</span></code></p></li>
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>], <em>optional</em>) – Download and set pretrained weights to the model. Options: ‘outdoor’, ‘indoor’.
+<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>) – Download and set pretrained weights to the model. Options: ‘outdoor’, ‘indoor’.
 ‘outdoor’ is trained on the MegaDepth dataset and ‘indoor’
 on the ScanNet.
 Default:  <code class="code docutils literal notranslate"><span class="pre">'outdoor'</span></code></p></li>
@@ -1778,7 +1778,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'out
 <span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/loftr/loftr.html#LoFTR.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.LoFTR.forward" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>]) – dictionary containing the input data in the following format:</p>
+<dd class="field-odd"><p><strong>data</strong> – dictionary containing the input data in the following format:</p>
 </dd>
 <dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -1788,11 +1788,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'out
 <li><p><strong>mask1</strong> (<em>optional</em>) – right image mask. ‘0’ indicates a padded position <span class="math notranslate nohighlight">\((N, H2, W2)\)</span>.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>]</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">keypoints0</span></code>, matching keypoints from image0 <span class="math notranslate nohighlight">\((NC, 2)\)</span>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">keypoints1</span></code>, matching keypoints from image1 <span class="math notranslate nohighlight">\((NC, 2)\)</span>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">confidence</span></code>, confidence score [0, 1] <span class="math notranslate nohighlight">\((NC)\)</span>.</p></li>

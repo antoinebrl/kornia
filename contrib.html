@@ -259,6 +259,7 @@
 <li class="toctree-l1"><a class="reference internal" href="models/yunet.html">YuNet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit.html">Vision Transformer (ViT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit_mobile.html">MobileViT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/tiny_vit.html">TinyViT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/loftr.html">LoFTR (matching)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/defmo.html">DeFMO (video)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/hardnet.html">Hardnet (descriptor)</a></li>
@@ -1285,7 +1286,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>image_encoder</strong> (<em>ImageEncoderViT</em><em> | </em><em>TinyViT</em>) – The backbone used to encode the image into image embeddings that allow for efficient mask
+<li><p><strong>image_encoder</strong> (<em>ImageEncoderViT</em><em> | </em><a class="reference internal" href="#kornia.contrib.TinyViT" title="kornia.contrib.TinyViT"><em>TinyViT</em></a>) – The backbone used to encode the image into image embeddings that allow for efficient mask
 prediction.</p></li>
 <li><p><strong>prompt_encoder</strong> (<em>PromptEncoder</em>) – Encodes various types of input prompts.</p></li>
 <li><p><strong>mask_decoder</strong> (<em>MaskDecoder</em>) – Predicts masks from the image embeddings and encoded prompts.</p></li>
@@ -1734,6 +1735,84 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">0.0<
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="kornia.contrib.TinyViT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.contrib.</span></span><span class="sig-name descname"><span class="pre">TinyViT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_chans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[96,</span> <span class="pre">192,</span> <span class="pre">384,</span> <span class="pre">768]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">6,</span> <span class="pre">2]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[3,</span> <span class="pre">6,</span> <span class="pre">12,</span> <span class="pre">24]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_sizes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[7,</span> <span class="pre">7,</span> <span class="pre">14,</span> <span class="pre">7]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_path_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_checkpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mbconv_expand_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_conv_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">nn.GELU</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mobile_sam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/models/tiny_vit.html#TinyViT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.TinyViT" title="Permalink to this definition">#</a></dt>
+<dd><p>TinyViT model, as described in <a class="reference external" href="https://arxiv.org/abs/2207.10666">https://arxiv.org/abs/2207.10666</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>optional</em>) – Size of input image.
+Default:  <code class="code docutils literal notranslate"><span class="pre">224</span></code></p></li>
+<li><p><strong>in_chans</strong> (<em>optional</em>) – Number of input image’s channels.
+Default:  <code class="code docutils literal notranslate"><span class="pre">3</span></code></p></li>
+<li><p><strong>num_classes</strong> (<em>optional</em>) – Number of output classes.
+Default:  <code class="code docutils literal notranslate"><span class="pre">1000</span></code></p></li>
+<li><p><strong>embed_dims</strong> (<em>optional</em>) – List of embedding dimensions.
+Default:  <code class="code docutils literal notranslate"><span class="pre">[96,</span> <span class="pre">192,</span> <span class="pre">384,</span> <span class="pre">768]</span></code></p></li>
+<li><p><strong>depths</strong> (<em>optional</em>) – List of block count for each downsampling stage
+Default:  <code class="code docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">6,</span> <span class="pre">2]</span></code></p></li>
+<li><p><strong>num_heads</strong> (<em>optional</em>) – List of attention heads used in self-attention for each downsampling stage.
+Default:  <code class="code docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">6,</span> <span class="pre">12,</span> <span class="pre">24]</span></code></p></li>
+<li><p><strong>window_sizes</strong> (<em>optional</em>) – List of self-attention’s window size for each downsampling stage.
+Default:  <code class="code docutils literal notranslate"><span class="pre">[7,</span> <span class="pre">7,</span> <span class="pre">14,</span> <span class="pre">7]</span></code></p></li>
+<li><p><strong>mlp_ratio</strong> (<em>optional</em>) – Ratio of MLP dimension to embedding dimension in self-attention.
+Default:  <code class="code docutils literal notranslate"><span class="pre">4.0</span></code></p></li>
+<li><p><strong>drop_rate</strong> (<em>optional</em>) – Dropout rate.
+Default:  <code class="code docutils literal notranslate"><span class="pre">0.0</span></code></p></li>
+<li><p><strong>drop_path_rate</strong> (<em>optional</em>) – Stochastic depth rate.
+Default:  <code class="code docutils literal notranslate"><span class="pre">0.0</span></code></p></li>
+<li><p><strong>use_checkpoint</strong> (<em>optional</em>) – Whether to use activation checkpointing to trade compute for memory.
+Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><strong>mbconv_expand_ratio</strong> (<em>optional</em>) – Expansion ratio used in MBConv block.
+Default:  <code class="code docutils literal notranslate"><span class="pre">4.0</span></code></p></li>
+<li><p><strong>local_conv_size</strong> (<em>optional</em>) – Kernel size of convolution used in TinyViTBlock
+Default:  <code class="code docutils literal notranslate"><span class="pre">3</span></code></p></li>
+<li><p><strong>activation</strong> (<em>optional</em>) – activation function.
+Default:  <code class="code docutils literal notranslate"><span class="pre">nn.GELU</span></code></p></li>
+<li><p><strong>mobile_same</strong> – Whether to use modifications for MobileSAM.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.contrib.TinyViT.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/models/tiny_vit.html#TinyViT.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.TinyViT.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Classify images if <code class="docutils literal notranslate"><span class="pre">mobile_sam=False</span></code>, produce feature maps if <code class="docutils literal notranslate"><span class="pre">mobile_sam=True</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.contrib.TinyViT.from_config">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretrained</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/models/tiny_vit.html#TinyViT.from_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.TinyViT.from_config" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a TinyViT model from pre-defined variants.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variant</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – TinyViT variant. Possible values: <code class="docutils literal notranslate"><span class="pre">'5m'</span></code>, <code class="docutils literal notranslate"><span class="pre">'11m'</span></code>, <code class="docutils literal notranslate"><span class="pre">'21m'</span></code>.</p></li>
+<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – whether to use pre-trained weights. Possible values: <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">'in22k'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'in1k'</span></code>. For TinyViT-21M (<code class="docutils literal notranslate"><span class="pre">variant='21m'</span></code>), <code class="docutils literal notranslate"><span class="pre">'in1k_384'</span></code>, <code class="docutils literal notranslate"><span class="pre">'in1k_512'</span></code> are also available.
+Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – other keyword arguments that will be passed to <a class="reference internal" href="#kornia.contrib.TinyViT" title="kornia.contrib.TinyViT"><code class="xref py py-class docutils literal notranslate"><span class="pre">TinyViT</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#kornia.contrib.TinyViT" title="kornia.contrib.TinyViT">TinyViT</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">img_size</span></code> is different from the pre-trained size, bicubic interpolation will be performed on
+attention biases. When using <code class="docutils literal notranslate"><span class="pre">pretrained=True</span></code>, ImageNet-1k checkpoint (<code class="docutils literal notranslate"><span class="pre">'in1k'</span></code>) is used.
+For feature extraction or fine-tuning, ImageNet-22k checkpoint (<code class="docutils literal notranslate"><span class="pre">'in22k'</span></code>) is preferred.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="kornia.contrib.ClassificationHead">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.contrib.</span></span><span class="sig-name descname"><span class="pre">ClassificationHead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embed_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">768</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/classification.html#ClassificationHead"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.ClassificationHead" title="Permalink to this definition">#</a></dt>
 <dd><p>Module to be used as a classification head.</p>
@@ -2122,6 +2201,11 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">0.35
 <li><a class="reference internal" href="#image-classification">Image Classification</a><ul>
 <li><a class="reference internal" href="#kornia.contrib.VisionTransformer"><code class="docutils literal notranslate"><span class="pre">VisionTransformer</span></code></a></li>
 <li><a class="reference internal" href="#kornia.contrib.MobileViT"><code class="docutils literal notranslate"><span class="pre">MobileViT</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.TinyViT"><code class="docutils literal notranslate"><span class="pre">TinyViT</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.contrib.TinyViT.forward"><code class="docutils literal notranslate"><span class="pre">TinyViT.forward()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.TinyViT.from_config"><code class="docutils literal notranslate"><span class="pre">TinyViT.from_config()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#kornia.contrib.ClassificationHead"><code class="docutils literal notranslate"><span class="pre">ClassificationHead</span></code></a></li>
 </ul>
 </li>

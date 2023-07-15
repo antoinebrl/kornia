@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Semantic segmentation" href="semantic_segmentation.html" /><link rel="prev" title="Image Registration" href="image_registration.html" />
-        <link rel="canonical" href="https://kornia.readthedocs.io/applications/image_denoising.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="LoFTR (matching)" href="loftr.html" /><link rel="prev" title="MobileViT" href="vit_mobile.html" />
+        <link rel="canonical" href="https://kornia.readthedocs.io/models/tiny_vit.html" />
 
     <link rel="shortcut icon" href="../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.05.20 -->
-        <title>Image Denoising - Kornia</title>
+        <title>TinyViT - Kornia</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -153,7 +153,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -239,33 +239,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../x.html">kornia.x</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">KORNIA APPLICATIONS</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Computer Vision Algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visual_prompting.html">Visual Prompting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="face_detection.html">Face Detection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="image_augmentations.html">Image Augmentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="image_classification.html">Image Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="image_matching.html">Image Matching</a></li>
-<li class="toctree-l1"><a class="reference internal" href="image_stitching.html">Image Stitching</a></li>
-<li class="toctree-l1"><a class="reference internal" href="image_registration.html">Image Registration</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Image Denoising</a></li>
-<li class="toctree-l1"><a class="reference internal" href="semantic_segmentation.html">Semantic segmentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="object_detection.html">Object detection</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../applications/intro.html">Computer Vision Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/visual_prompting.html">Visual Prompting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/face_detection.html">Face Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/image_augmentations.html">Image Augmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/image_classification.html">Image Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/image_matching.html">Image Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/image_stitching.html">Image Stitching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/image_registration.html">Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/image_denoising.html">Image Denoising</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/semantic_segmentation.html">Semantic segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/object_detection.html">Object detection</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">KORNIA MODELS</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../models/rt_detr.html">Real-Time Detection Transformer (RT-DETR)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/segment_anything.html">Segment Anything (SAM)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/yunet.html">YuNet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/vit.html">Vision Transformer (ViT)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/vit_mobile.html">MobileViT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/tiny_vit.html">TinyViT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/loftr.html">LoFTR (matching)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/defmo.html">DeFMO (video)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/hardnet.html">Hardnet (descriptor)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/affnet.html">Affnet (detection)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/sold2.html">SOLD2 (Line detection and matching)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/dexined.html">Dexined (edge detection)</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rt_detr.html">Real-Time Detection Transformer (RT-DETR)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="segment_anything.html">Segment Anything (SAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yunet.html">YuNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vit.html">Vision Transformer (ViT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vit_mobile.html">MobileViT</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">TinyViT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loftr.html">LoFTR (matching)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defmo.html">DeFMO (video)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardnet.html">Hardnet (descriptor)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="affnet.html">Affnet (detection)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sold2.html">SOLD2 (Line detection and matching)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dexined.html">Dexined (edge detection)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
 <ul>
@@ -311,38 +311,65 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="image-denoising">
-<h1>Image Denoising<a class="headerlink" href="#image-denoising" title="Permalink to this heading">#</a></h1>
-<gradio-app space="kornia/total_variation_denoising"></gradio-app></section>
+          <section id="tinyvit">
+<span id="kornia-tiny-vit"></span><h1>TinyViT<a class="headerlink" href="#tinyvit" title="Permalink to this heading">#</a></h1>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><strong>TinyViT: Fast Pretraining Distillation for Small Vision Transformers</strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text"><strong>Abstract:</strong> Vision transformer (ViT) recently has drawn great attention in computer vision due to its remarkable model capability. However, most prevailing ViT models suffer from huge number of parameters, restricting their applicability on devices with limited resources. To alleviate this issue, we propose TinyViT, a new family of tiny and efficient small vision transformers pretrained on large-scale datasets with our proposed fast distillation framework. The central idea is to transfer knowledge from large pretrained models to small ones, while enabling small models to get the dividends of massive pretraining data. More specifically, we apply distillation during pretraining for knowledge transfer. The logits of large teacher models are sparsified and stored in disk in advance to save the memory cost and computation overheads. The tiny student transformers are automatically scaled down from a large pretrained model with computation and parameter constraints. Comprehensive experiments demonstrate the efficacy of TinyViT. It achieves a top-1 accuracy of 84.8% on ImageNet-1k with only 21M parameters, being comparable to Swin-B pretrained on ImageNet-21k while using 4.2 times fewer parameters. Moreover, increasing image resolutions, TinyViT can reach 86.5% accuracy, being slightly better than Swin-L while using only 11% parameters. Last but not the least, we demonstrate a good transfer ability of TinyViT on various downstream tasks. Code and models are available at <a class="reference external" href="https://github.com/microsoft/Cream/tree/main/TinyViT">https://github.com/microsoft/Cream/tree/main/TinyViT</a>.</p>
+<p class="sd-card-text"><strong>Tasks:</strong> Image Classification, Object Detection</p>
+<p class="sd-card-text"><strong>Datasets:</strong> ImageNet, MS-COCO</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><strong>Authors:</strong>  Kan Wu, Jinnian Zhang, Houwen Peng, Mengchen Liu, Bin Xiao, Jianlong Fu, Lu Yuan</p>
+</div>
+<a class="sd-stretched-link reference external" href="https://arxiv.org/abs/2110.02178"></a></div>
+<img alt="https://github.com/microsoft/Cream/blob/main/TinyViT/.figure/framework.png?raw=true" class="align-center" src="https://github.com/microsoft/Cream/blob/main/TinyViT/.figure/framework.png?raw=true" />
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<p>You can use TinyViT models as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">kornia.contrib.models.tiny_vit</span> <span class="kn">import</span> <span class="n">TinyViT</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">TinyViT</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="s2">&quot;5m&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># ImageNet-1k pre-trained</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>     <span class="c1"># 1x1000</span>
+</pre></div>
+</div>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="semantic_segmentation.html">
+          <a class="next-page" href="loftr.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Semantic segmentation</div>
+                <div class="title">LoFTR (matching)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="image_registration.html">
+          <a class="prev-page" href="vit_mobile.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Image Registration</div>
+                <div class="title">MobileViT</div>
                 
               </div>
             </a>
@@ -364,8 +391,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">TinyViT</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

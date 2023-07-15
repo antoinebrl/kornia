@@ -256,6 +256,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="models/rt_detr.html">Real-Time Detection Transformer (RT-DETR)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/segment_anything.html">Segment Anything (SAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/mobile_sam.html">Faster Segment Anything (MobileSAM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/yunet.html">YuNet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit.html">Vision Transformer (ViT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/vit_mobile.html">MobileViT</a></li>
@@ -1195,8 +1196,13 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">100<
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.contrib.models.sam.</span></span><span class="sig-name descname"><span class="pre">SamModelType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/contrib/models/sam/model.html#SamModelType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.contrib.models.sam.SamModelType" title="Permalink to this definition">#</a></dt>
 <dd><p>Map the SAM model types.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="kornia.contrib.models.sam.SamModelType.mobile_sam">
-<span class="sig-name descname"><span class="pre">mobile_sam</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#kornia.contrib.models.sam.SamModelType.mobile_sam" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="kornia.contrib.models.sam.SamModelType.vit_h">
+<span class="sig-name descname"><span class="pre">vit_h</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#kornia.contrib.models.sam.SamModelType.vit_h" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kornia.contrib.models.sam.SamModelType.vit_l">
+<span class="sig-name descname"><span class="pre">vit_l</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#kornia.contrib.models.sam.SamModelType.vit_l" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1205,13 +1211,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">100<
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="kornia.contrib.models.sam.SamModelType.vit_h">
-<span class="sig-name descname"><span class="pre">vit_h</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#kornia.contrib.models.sam.SamModelType.vit_h" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="kornia.contrib.models.sam.SamModelType.vit_l">
-<span class="sig-name descname"><span class="pre">vit_l</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#kornia.contrib.models.sam.SamModelType.vit_l" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="kornia.contrib.models.sam.SamModelType.mobile_sam">
+<span class="sig-name descname"><span class="pre">mobile_sam</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#kornia.contrib.models.sam.SamModelType.mobile_sam" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1229,6 +1230,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <li><p>0, ‘vit_h’ or <code class="xref py py-func docutils literal notranslate"><span class="pre">kornia.contrib.sam.SamModelType.vit_h()</span></code></p></li>
 <li><p>1, ‘vit_l’ or <code class="xref py py-func docutils literal notranslate"><span class="pre">kornia.contrib.sam.SamModelType.vit_l()</span></code></p></li>
 <li><p>2, ‘vit_b’ or <code class="xref py py-func docutils literal notranslate"><span class="pre">kornia.contrib.sam.SamModelType.vit_b()</span></code></p></li>
+<li><p>3, ‘mobile_sam’, or <code class="xref py py-func docutils literal notranslate"><span class="pre">kornia.contrib.sam.SamModelType.mobile_sam()</span></code></p></li>
 </ul>
 </p></li>
 <li><p><strong>checkpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>) – URL or a path for a file with the weights of the model
@@ -2164,10 +2166,10 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">0.35
 <li><a class="reference internal" href="#kornia.contrib.connected_components"><code class="docutils literal notranslate"><span class="pre">connected_components()</span></code></a></li>
 <li><a class="reference internal" href="#segment-anything-sam">Segment Anything (SAM)</a><ul>
 <li><a class="reference internal" href="#kornia.contrib.models.sam.SamModelType"><code class="docutils literal notranslate"><span class="pre">SamModelType</span></code></a><ul>
-<li><a class="reference internal" href="#kornia.contrib.models.sam.SamModelType.mobile_sam"><code class="docutils literal notranslate"><span class="pre">SamModelType.mobile_sam</span></code></a></li>
-<li><a class="reference internal" href="#kornia.contrib.models.sam.SamModelType.vit_b"><code class="docutils literal notranslate"><span class="pre">SamModelType.vit_b</span></code></a></li>
 <li><a class="reference internal" href="#kornia.contrib.models.sam.SamModelType.vit_h"><code class="docutils literal notranslate"><span class="pre">SamModelType.vit_h</span></code></a></li>
 <li><a class="reference internal" href="#kornia.contrib.models.sam.SamModelType.vit_l"><code class="docutils literal notranslate"><span class="pre">SamModelType.vit_l</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.models.sam.SamModelType.vit_b"><code class="docutils literal notranslate"><span class="pre">SamModelType.vit_b</span></code></a></li>
+<li><a class="reference internal" href="#kornia.contrib.models.sam.SamModelType.mobile_sam"><code class="docutils literal notranslate"><span class="pre">SamModelType.mobile_sam</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#kornia.contrib.models.sam.SamConfig"><code class="docutils literal notranslate"><span class="pre">SamConfig</span></code></a><ul>

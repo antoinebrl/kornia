@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contribute to Kornia" href="contribute.html" /><link rel="prev" title="Dexined (edge detection)" href="../models/dexined.html" />
-        <link rel="canonical" href="https://kornia.readthedocs.io/community/chinese.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="YuNet" href="yunet.html" /><link rel="prev" title="Segment Anything (SAM)" href="segment_anything.html" />
+        <link rel="canonical" href="https://kornia.readthedocs.io/models/mobile_sam.html" />
 
     <link rel="shortcut icon" href="../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.05.20 -->
-        <title>Kornia 社区 - Kornia</title>
+        <title>Faster Segment Anything (MobileSAM) - Kornia</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -153,7 +153,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -253,37 +253,37 @@
 <li class="toctree-l1"><a class="reference internal" href="../applications/object_detection.html">Object detection</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">KORNIA MODELS</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../models/rt_detr.html">Real-Time Detection Transformer (RT-DETR)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/segment_anything.html">Segment Anything (SAM)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/mobile_sam.html">Faster Segment Anything (MobileSAM)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/yunet.html">YuNet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/vit.html">Vision Transformer (ViT)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/vit_mobile.html">MobileViT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/tiny_vit.html">TinyViT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/loftr.html">LoFTR (matching)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/defmo.html">DeFMO (video)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/hardnet.html">Hardnet (descriptor)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/affnet.html">Affnet (detection)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/sold2.html">SOLD2 (Line detection and matching)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/dexined.html">Dexined (edge detection)</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rt_detr.html">Real-Time Detection Transformer (RT-DETR)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="segment_anything.html">Segment Anything (SAM)</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Faster Segment Anything (MobileSAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yunet.html">YuNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vit.html">Vision Transformer (ViT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vit_mobile.html">MobileViT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiny_vit.html">TinyViT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loftr.html">LoFTR (matching)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defmo.html">DeFMO (video)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardnet.html">Hardnet (descriptor)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="affnet.html">Affnet (detection)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sold2.html">SOLD2 (Line detection and matching)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dexined.html">Dexined (edge detection)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/kornia/kornia/issues">Issue tracker</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://join.slack.com/t/kornia/shared_invite/zt-csobk21g-2AQRi~X9Uu6PLMuUZdvfjA">Slack community</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://librecv.org">LibreCV community</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://twitter.com/kornia_foss">Twitter @kornia_foss</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Kornia 社区</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/chinese.html">Kornia 社区</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.youtube.com/channel/UCI1SE1Ij2Fast5BSKxoa7Ag">Kornia Youtube</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.linkedin.com/company/kornia/">Kornia LinkedIn</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://kornia.org">Kornia AI</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">COMMUNITY</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute to Kornia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faqs.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/contribute.html">Contribute to Kornia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/bibliography.html">Bibliography</a></li>
 </ul>
 
 </div>
@@ -312,17 +312,51 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="kornia">
-<h1>Kornia 社区<a class="headerlink" href="#kornia" title="Permalink to this heading">#</a></h1>
-<p>欢迎加入 Kornia 社区！扫描下方的二维码可关注 Kornia 团队的 <a class="reference external" href="https://jq.qq.com/?_wv=1027&amp;k=y8iqu7Do">官方交流 QQ 群</a>.</p>
-<a class="reference internal image-reference" href="https://github.com/kornia/kornia/raw/master/docs/source/_static/img/cn_community_qq.jpg"><img alt="QQ group" src="https://github.com/kornia/kornia/raw/master/docs/source/_static/img/cn_community_qq.jpg" style="height: 700px;" /></a>
-<a class="reference internal image-reference" href="https://github.com/kornia/kornia/raw/master/docs/source/_static/img/cn_community_zhihu.jpg"><img alt="Zhihu" src="https://github.com/kornia/kornia/raw/master/docs/source/_static/img/cn_community_zhihu.jpg" style="height: 700px;" /></a>
+          <section id="faster-segment-anything-mobilesam">
+<h1>Faster Segment Anything (MobileSAM)<a class="headerlink" href="#faster-segment-anything-mobilesam" title="Permalink to this heading">#</a></h1>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><strong>Faster Segment Anything: Towards Lightweight SAM for Mobile Applications</strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text"><strong>Abstract:</strong> Segment Anything Model (SAM) has attracted significant attention due to its impressive zero-shot transfer performance and high versatility for numerous vision applications (like image editing with fine-grained control). Many of such applications need to be run on resource-constraint edge devices, like mobile phones. In this work, we aim to make SAM mobile-friendly by replacing the heavyweight image encoder with a lightweight one. A naive way to train such a new SAM as in the original SAM paper leads to unsatisfactory performance, especially when limited training sources are available. We find that this is mainly caused by the coupled optimization of the image encoder and mask decoder, motivated by which we propose decoupled distillation. Concretely, we distill the knowledge from the heavy image encoder (ViT-H in the original SAM) to a lightweight image encoder, which can be automatically compatible with the mask decoder in the original SAM. The training can be completed on a single GPU within less than one day, and the resulting lightweight SAM is termed MobileSAM which is more than 60 times smaller yet performs on par with the original SAM. For inference speed, With a single GPU, MobileSAM runs around 10ms per image: 8ms on the image encoder and 4ms on the mask decoder. With superior performance, our MobileSAM is around 5 times faster than the concurrent FastSAM and 7 times smaller, making it more suitable for mobile applications. Moreover, we show that MobileSAM can run relatively smoothly on CPU. The code for our project is provided at <a class="reference external" href="https://github.com/ChaoningZhang/MobileSAM">https://github.com/ChaoningZhang/MobileSAM</a>, with a demo showing that MobileSAM can run relatively smoothly on CPU.</p>
+<p class="sd-card-text"><strong>Tasks:</strong> Segmentation</p>
+<p class="sd-card-text"><strong>Datasets:</strong> SA-1B</p>
+<p class="sd-card-text"><strong>Licence:</strong> Apache 2.0</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><strong>Authors:</strong> Chaoning Zhang, Dongshen Han, Yu Qiao, Jung Uk Kim, Sung-Ho Bae, Seungkyu Lee, Choong Seon Hong</p>
+</div>
+<a class="sd-stretched-link reference external" href="https://arxiv.org/abs/2306.14289"></a></div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<p>MobileSAM is integrated directly into our Segment-Anything implementation. Once you have loaded MobileSAM, you can use it just like how you use SAM.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">kornia.contrib.models.sam</span> <span class="kn">import</span> <span class="n">SamConfig</span>
+<span class="kn">from</span> <span class="nn">kornia.contrib.visual_prompter</span> <span class="kn">import</span> <span class="n">VisualPrompter</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+<span class="n">prompter</span> <span class="o">=</span> <span class="n">VisualPrompter</span><span class="p">(</span><span class="n">SamConfig</span><span class="p">(</span><span class="s2">&quot;mobile_sam&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">prompter</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="n">keypoints</span> <span class="o">=</span> <span class="n">Keypoints</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">500.0</span><span class="p">,</span> <span class="mf">375.0</span><span class="p">]]]))</span> <span class="c1"># BxNx2</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="c1"># BxN</span>
+
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">prompter</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="n">keypoints</span><span class="o">=</span><span class="n">keypoints</span><span class="p">,</span>
+    <span class="n">keypoints_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+    <span class="n">multimask_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For more information on how to use SAM and <a class="reference internal" href="../contrib.html#kornia.contrib.visual_prompter.VisualPrompter" title="kornia.contrib.visual_prompter.VisualPrompter"><code class="xref py py-class docutils literal notranslate"><span class="pre">kornia.contrib.visual_prompter.VisualPrompter</span></code></a>, refer to <a class="reference internal" href="segment_anything.html"><span class="doc">Segment Anything (SAM)</span></a>.</p>
+</section>
 </section>
 
         </article>
@@ -330,23 +364,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="contribute.html">
+          <a class="next-page" href="yunet.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Contribute to Kornia</div>
+                <div class="title">YuNet</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../models/dexined.html">
+          <a class="prev-page" href="segment_anything.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Dexined (edge detection)</div>
+                <div class="title">Segment Anything (SAM)</div>
                 
               </div>
             </a>
@@ -368,8 +402,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Faster Segment Anything (MobileSAM)</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -371,9 +371,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">config</span><span class="p">:</span> <span class="n">SamConfig</span> <span class="o">=</span> <span class="n">SamConfig</span><span class="p">(</span>
-            <span class="n">model_type</span><span class="o">=</span><span class="s1">&#39;vit_h&#39;</span><span class="p">,</span> <span class="n">checkpoint</span><span class="o">=</span><span class="s1">&#39;https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth&#39;</span>
-        <span class="p">),</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">SamConfig</span> <span class="o">=</span> <span class="n">SamConfig</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s1">&#39;vit_h&#39;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">dtype</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

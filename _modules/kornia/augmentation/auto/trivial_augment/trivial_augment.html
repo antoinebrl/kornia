@@ -353,6 +353,13 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: candidate transformations. If None, a default candidate list will be used.</span>
+<span class="sd">        transformation_matrix_mode: computation mode for the chained transformation matrix, via `.transform_matrix`</span>
+<span class="sd">                                    attribute.</span>
+<span class="sd">                                    If `silent`, transformation matrix will be computed silently and the non-rigid</span>
+<span class="sd">                                    modules will be ignored as identity transformations.</span>
+<span class="sd">                                    If `rigid`, transformation matrix will be computed silently and the non-rigid</span>
+<span class="sd">                                    modules will trigger errors.</span>
+<span class="sd">                                    If `skip`, transformation matrix will be totally ignored.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; import kornia.augmentation as K</span>
@@ -362,13 +369,15 @@
 <span class="sd">        torch.Size([5, 3, 30, 30])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">SUBPLOLICY_CONFIG</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">SUBPLOLICY_CONFIG</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">transformation_matrix_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;silent&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">policy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_policy</span> <span class="o">=</span> <span class="n">default_policy</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_policy</span> <span class="o">=</span> <span class="n">policy</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">_policy</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">_policy</span><span class="p">,</span> <span class="n">transformation_matrix_mode</span><span class="o">=</span><span class="n">transformation_matrix_mode</span><span class="p">)</span>
         <span class="n">selection_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rand_selector</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">selection_weights</span><span class="p">)</span>
 

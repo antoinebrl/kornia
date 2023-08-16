@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/_modules/kornia/image/image.html" />
 
-    <link rel="shortcut icon" href="../../../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="../../../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
         <title>kornia.image.image - Kornia</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
@@ -217,9 +217,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.epipolar.html">kornia.geometry.epipolar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.homography.html">kornia.geometry.homography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.liegroup.html">kornia.geometry.liegroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../geometry.liegroup.html#lie-algebra">lie algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../geometry.liegroup.html#lie-group-and-lie-algebra">lie group and lie algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.linalg.html">kornia.geometry.linalg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.line.html">kornia.geometry.line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.quaternion.html">kornia.geometry.quaternion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../geometry.solvers.html">kornia.geometry.solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.subpix.html">kornia.geometry.subpix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.transform.html">kornia.geometry.transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../geometry.ransac.html">kornia.geometry.ransac</a></li>
@@ -331,6 +334,7 @@
 <span class="kn">from</span> <span class="nn">kornia.core.check</span> <span class="kn">import</span> <span class="n">KORNIA_CHECK</span><span class="p">,</span> <span class="n">KORNIA_CHECK_SHAPE</span>
 <span class="kn">from</span> <span class="nn">kornia.image.base</span> <span class="kn">import</span> <span class="n">ChannelsOrder</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="p">,</span> <span class="n">ImageLayout</span><span class="p">,</span> <span class="n">ImageSize</span><span class="p">,</span> <span class="n">PixelFormat</span>
 <span class="kn">from</span> <span class="nn">kornia.io.io</span> <span class="kn">import</span> <span class="n">ImageLoadType</span><span class="p">,</span> <span class="n">load_image</span><span class="p">,</span> <span class="n">write_image</span>
+<span class="kn">from</span> <span class="nn">kornia.utils.image_print</span> <span class="kn">import</span> <span class="n">image_to_string</span>
 
 <span class="c1"># placeholder for numpy</span>
 <span class="n">np_ndarray</span> <span class="o">=</span> <span class="n">Any</span>
@@ -405,6 +409,15 @@
 
     <span class="c1"># TODO: explore use TensorWrapper</span>
 <div class="viewcode-block" id="Image.to"><a class="viewcode-back" href="../../../image.html#kornia.image.Image.to">[docs]</a>    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move the image to the given device and dtype.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            device: the device to move the image to.</span>
+<span class="sd">            dtype: the data type to cast the image to.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Image: the image moved to the given device and dtype.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
             <span class="n">dtype</span><span class="p">,</span> <span class="n">device</span> <span class="o">=</span> <span class="n">device</span><span class="p">,</span> <span class="kc">None</span>
         <span class="c1"># put the data to the device and dtype</span>
@@ -413,6 +426,7 @@
 
     <span class="c1"># TODO: explore use TensorWrapper</span>
 <div class="viewcode-block" id="Image.clone"><a class="viewcode-back" href="../../../image.html#kornia.image.Image.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a copy of the image.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixel_format</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
@@ -587,7 +601,22 @@
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">channels_order</span> <span class="o">==</span> <span class="n">ChannelsOrder</span><span class="o">.</span><span class="n">CHANNELS_LAST</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">write_image</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div></div>
+        <span class="n">write_image</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Image.print"><a class="viewcode-back" href="../../../image.html#kornia.image.Image.print">[docs]</a>    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print the image tensor to the console.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            max_width: the maximum width of the image to print.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            img = Image.from_file(&quot;panda.png&quot;)</span>
+<span class="sd">            img.print()</span>
+
+<span class="sd">        .. image:: https://github.com/kornia/data/blob/main/print_image.png?raw=true</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">image_to_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">max_width</span><span class="p">))</span></div></div>
 </pre></div>
         </article>
       </div>

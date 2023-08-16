@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="kornia.io" href="io.html" /><link rel="prev" title="kornia.sensors" href="sensors.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/sensors.camera.html" />
 
-    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
         <title>kornia.sensors.camera - Kornia</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
@@ -218,9 +218,12 @@
 <li class="toctree-l2"><a class="reference internal" href="geometry.epipolar.html">kornia.geometry.epipolar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.homography.html">kornia.geometry.homography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html">kornia.geometry.liegroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-algebra">lie algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-group-and-lie-algebra">lie group and lie algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.linalg.html">kornia.geometry.linalg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.line.html">kornia.geometry.line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.quaternion.html">kornia.geometry.quaternion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.solvers.html">kornia.geometry.solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.subpix.html">kornia.geometry.subpix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.transform.html">kornia.geometry.transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.ransac.html">kornia.geometry.ransac</a></li>
@@ -522,6 +525,200 @@ As of now, only the Pinhole model is supported.</p>
 </div>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.sensors.camera.CameraModelType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.sensors.camera.</span></span><span class="sig-name descname"><span class="pre">CameraModelType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/camera_model.html#CameraModelType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.CameraModelType" title="Permalink to this definition">#</a></dt>
+<dd><p>An enumeration.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.sensors.camera.PinholeModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.sensors.camera.</span></span><span class="sig-name descname"><span class="pre">PinholeModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/camera_model.html#PinholeModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.PinholeModel" title="Permalink to this definition">#</a></dt>
+<dd><p>Class to represent Pinhole Camera Model.</p>
+<p>The pinhole camera model describes the mathematical relationship between
+the coordinates of a point in three-dimensional space and its projection
+onto the image plane of an ideal pinhole camera,
+where the camera aperture is described as a point and no lenses are used to focus light.
+See more: <a class="reference external" href="https://en.wikipedia.org/wiki/Pinhole_camera_model">https://en.wikipedia.org/wiki/Pinhole_camera_model</a></p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cam</span> <span class="o">=</span> <span class="n">CameraModel</span><span class="p">(</span><span class="n">ImageSize</span><span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span> <span class="n">CameraModelType</span><span class="o">.</span><span class="n">PINHOLE</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mf">328.</span><span class="p">,</span> <span class="mf">328.</span><span class="p">,</span> <span class="mf">320.</span><span class="p">,</span> <span class="mf">240.</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cam</span>
+<span class="go">CameraModel(ImageSize(height=480, width=640), PinholeModel, tensor([328., 328., 320., 240.]))</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.sensors.camera.PinholeModel.matrix">
+<span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/camera_model.html#PinholeModel.matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.PinholeModel.matrix" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the camera matrix.</p>
+<p>The matrix is of the form:
+:rtype: <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} fx &amp; 0 &amp; cx \\
+0 &amp; fy &amp; cy \\
+0 &amp; 0 &amp; 1\end{bmatrix}\end{split}\]</div>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cam</span> <span class="o">=</span> <span class="n">CameraModel</span><span class="p">(</span><span class="n">ImageSize</span><span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span> <span class="n">CameraModelType</span><span class="o">.</span><span class="n">PINHOLE</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cam</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
+<span class="go">tensor([[1., 0., 3.],</span>
+<span class="go">        [0., 2., 4.],</span>
+<span class="go">        [0., 0., 1.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.sensors.camera.PinholeModel.scale">
+<span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/camera_model.html#PinholeModel.scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.PinholeModel.scale" title="Permalink to this definition">#</a></dt>
+<dd><p>Scales the camera model by a scale factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scale_factor</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – Scale factor to scale the camera model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#kornia.sensors.camera.PinholeModel" title="kornia.sensors.camera.camera_model.PinholeModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PinholeModel</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Scaled camera model.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cam</span> <span class="o">=</span> <span class="n">CameraModel</span><span class="p">(</span><span class="n">ImageSize</span><span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span> <span class="n">CameraModelType</span><span class="o">.</span><span class="n">PINHOLE</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mf">328.</span><span class="p">,</span> <span class="mf">328.</span><span class="p">,</span> <span class="mf">320.</span><span class="p">,</span> <span class="mf">240.</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cam_scaled</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cam_scaled</span><span class="o">.</span><span class="n">params</span>
+<span class="go">tensor([656., 656., 640., 480.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<section id="distortions">
+<h2>Distortions<a class="headerlink" href="#distortions" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.sensors.camera.distortion_model.AffineTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.sensors.camera.distortion_model.</span></span><span class="sig-name descname"><span class="pre">AffineTransform</span></span><a class="reference internal" href="_modules/kornia/sensors/camera/distortion_model.html#AffineTransform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.distortion_model.AffineTransform" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="kornia.sensors.camera.distortion_model.AffineTransform.distort">
+<span class="sig-name descname"><span class="pre">distort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/distortion_model.html#AffineTransform.distort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.distortion_model.AffineTransform.distort" title="Permalink to this definition">#</a></dt>
+<dd><p>Distort one or more Vector2 points using the affine transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – Tensor representing the affine transform parameters.</p></li>
+<li><p><strong>points</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Vector2</span></code>) – Vector2 representing the points to distort.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector2</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Vector2 representing the distorted points.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">points</span> <span class="o">=</span> <span class="n">Vector2</span><span class="o">.</span><span class="n">from_coords</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AffineTransform</span><span class="p">()</span><span class="o">.</span><span class="n">distort</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+<span class="go">x: 4.0</span>
+<span class="go">y: 8.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.sensors.camera.distortion_model.AffineTransform.undistort">
+<span class="sig-name descname"><span class="pre">undistort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/distortion_model.html#AffineTransform.undistort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.distortion_model.AffineTransform.undistort" title="Permalink to this definition">#</a></dt>
+<dd><p>Undistort one or more Vector2 points using the affine transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – Tensor representing the affine transform parameters.</p></li>
+<li><p><strong>points</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Vector2</span></code>) – Vector2 representing the points to undistort.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector2</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Vector2 representing the undistorted points.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">points</span> <span class="o">=</span> <span class="n">Vector2</span><span class="o">.</span><span class="n">from_coords</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AffineTransform</span><span class="p">()</span><span class="o">.</span><span class="n">undistort</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+<span class="go">x: -2.0</span>
+<span class="go">y: -1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="projections">
+<h2>Projections<a class="headerlink" href="#projections" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.sensors.camera.projection_model.Z1Projection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.sensors.camera.projection_model.</span></span><span class="sig-name descname"><span class="pre">Z1Projection</span></span><a class="reference internal" href="_modules/kornia/sensors/camera/projection_model.html#Z1Projection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.projection_model.Z1Projection" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="kornia.sensors.camera.projection_model.Z1Projection.project">
+<span class="sig-name descname"><span class="pre">project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/projection_model.html#Z1Projection.project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.projection_model.Z1Projection.project" title="Permalink to this definition">#</a></dt>
+<dd><p>Project one or more Vector3 from the camera frame into the canonical z=1 plane through perspective
+division.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>points</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3</span></code>) – Vector3 representing the points to project.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector2</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Vector2 representing the projected points.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">points</span> <span class="o">=</span> <span class="n">Vector3</span><span class="o">.</span><span class="n">from_coords</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z1Projection</span><span class="p">()</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="go">x: 0.3333333432674408</span>
+<span class="go">y: 0.6666666865348816</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.sensors.camera.projection_model.Z1Projection.unproject">
+<span class="sig-name descname"><span class="pre">unproject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/sensors/camera/projection_model.html#Z1Projection.unproject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.sensors.camera.projection_model.Z1Projection.unproject" title="Permalink to this definition">#</a></dt>
+<dd><p>Unproject one or more Vector2 from the canonical z=1 plane into the camera frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>Vector2</em>) – Vector2 representing the points to unproject.</p></li>
+<li><p><strong>depth</strong> (<em>Tensor</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Tensor representing the depth of the points to unproject.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vector3</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Vector3 representing the unprojected points.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">points</span> <span class="o">=</span> <span class="n">Vector2</span><span class="o">.</span><span class="n">from_coords</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z1Projection</span><span class="p">()</span><span class="o">.</span><span class="n">unproject</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">x: tensor([3.])</span>
+<span class="go">y: tensor([6.])</span>
+<span class="go">z: tensor([3.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 
         </article>
@@ -596,6 +793,28 @@ As of now, only the Pinhole model is supported.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#kornia.sensors.camera.CameraModel"><code class="docutils literal notranslate"><span class="pre">CameraModel</span></code></a></li>
+<li><a class="reference internal" href="#kornia.sensors.camera.CameraModelType"><code class="docutils literal notranslate"><span class="pre">CameraModelType</span></code></a></li>
+<li><a class="reference internal" href="#kornia.sensors.camera.PinholeModel"><code class="docutils literal notranslate"><span class="pre">PinholeModel</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.sensors.camera.PinholeModel.matrix"><code class="docutils literal notranslate"><span class="pre">PinholeModel.matrix()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.sensors.camera.PinholeModel.scale"><code class="docutils literal notranslate"><span class="pre">PinholeModel.scale()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#distortions">Distortions</a><ul>
+<li><a class="reference internal" href="#kornia.sensors.camera.distortion_model.AffineTransform"><code class="docutils literal notranslate"><span class="pre">AffineTransform</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.sensors.camera.distortion_model.AffineTransform.distort"><code class="docutils literal notranslate"><span class="pre">AffineTransform.distort()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.sensors.camera.distortion_model.AffineTransform.undistort"><code class="docutils literal notranslate"><span class="pre">AffineTransform.undistort()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#projections">Projections</a><ul>
+<li><a class="reference internal" href="#kornia.sensors.camera.projection_model.Z1Projection"><code class="docutils literal notranslate"><span class="pre">Z1Projection</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.sensors.camera.projection_model.Z1Projection.project"><code class="docutils literal notranslate"><span class="pre">Z1Projection.project()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.sensors.camera.projection_model.Z1Projection.unproject"><code class="docutils literal notranslate"><span class="pre">Z1Projection.unproject()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -615,6 +834,7 @@ As of now, only the Pinhole model is supported.</p>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/custom.js"></script>
     
     <!-- DocsQA integration start -->

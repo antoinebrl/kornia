@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/genindex.html" />
 
-    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.07.26 --><title>Index - Kornia</title>
+    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 --><title>Index - Kornia</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -216,9 +216,12 @@
 <li class="toctree-l2"><a class="reference internal" href="geometry.epipolar.html">kornia.geometry.epipolar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.homography.html">kornia.geometry.homography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html">kornia.geometry.liegroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-algebra">lie algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-group-and-lie-algebra">lie group and lie algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.linalg.html">kornia.geometry.linalg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.line.html">kornia.geometry.line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.quaternion.html">kornia.geometry.quaternion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.solvers.html">kornia.geometry.solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.subpix.html">kornia.geometry.subpix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.transform.html">kornia.geometry.transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.ransac.html">kornia.geometry.ransac</a></li>
@@ -436,9 +439,11 @@
 </li>
         <li><a href="geometry.transform.html#kornia.geometry.transform.Affine">Affine (class in kornia.geometry.transform)</a>
 </li>
+        <li><a href="geometry.transform.html#kornia.geometry.transform.affine">affine() (in module kornia.geometry.transform)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="geometry.transform.html#kornia.geometry.transform.affine">affine() (in module kornia.geometry.transform)</a>
+        <li><a href="sensors.camera.html#kornia.sensors.camera.distortion_model.AffineTransform">AffineTransform (class in kornia.sensors.camera.distortion_model)</a>
 </li>
         <li><a href="geometry.conversions.html#kornia.geometry.conversions.angle_to_rotation_matrix">angle_to_rotation_matrix() (in module kornia.geometry.conversions)</a>
 </li>
@@ -589,6 +594,8 @@
         <li><a href="sensors.camera.html#kornia.sensors.camera.CameraModel">CameraModel (class in kornia.sensors.camera)</a>
 </li>
         <li><a href="sensors.camera.html#kornia.sensors.camera.CameraModelBase">CameraModelBase (class in kornia.sensors.camera)</a>
+</li>
+        <li><a href="sensors.camera.html#kornia.sensors.camera.CameraModelType">CameraModelType (class in kornia.sensors.camera)</a>
 </li>
         <li><a href="geometry.conversions.html#kornia.geometry.conversions.camtoworld_graphics_to_vision_4x4">camtoworld_graphics_to_vision_4x4() (in module kornia.geometry.conversions)</a>
 </li>
@@ -847,6 +854,8 @@
         <li><a href="contrib.html#kornia.contrib.distance_transform">distance_transform() (in module kornia.contrib)</a>
 </li>
         <li><a href="contrib.html#kornia.contrib.DistanceTransform">DistanceTransform (class in kornia.contrib)</a>
+</li>
+        <li><a href="sensors.camera.html#kornia.sensors.camera.distortion_model.AffineTransform.distort">distort() (kornia.sensors.camera.distortion_model.AffineTransform method)</a>
 </li>
         <li><a href="geometry.calibration.html#kornia.geometry.calibration.distort_points">distort_points() (in module kornia.geometry.calibration)</a>
 </li>
@@ -1688,6 +1697,8 @@
 </li>
           <li><a href="sensors.camera.html#kornia.sensors.camera.CameraModelBase.matrix">(kornia.sensors.camera.CameraModelBase method)</a>
 </li>
+          <li><a href="sensors.camera.html#kornia.sensors.camera.PinholeModel.matrix">(kornia.sensors.camera.PinholeModel method)</a>
+</li>
         </ul></li>
         <li><a href="geometry.conversions.html#kornia.geometry.conversions.matrix4x4_to_Rt">matrix4x4_to_Rt() (in module kornia.geometry.conversions)</a>
 </li>
@@ -1874,6 +1885,8 @@
 </li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera">PinholeCamera (class in kornia.geometry.camera.pinhole)</a>
 </li>
+        <li><a href="sensors.camera.html#kornia.sensors.camera.PinholeModel">PinholeModel (class in kornia.sensors.camera)</a>
+</li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.pixel2cam">pixel2cam() (in module kornia.geometry.camera.pinhole)</a>
 </li>
         <li><a href="image.html#kornia.image.Image.pixel_format">pixel_format (kornia.image.Image property)</a>
@@ -1906,12 +1919,16 @@
 </li>
         <li><a href="contrib.html#kornia.contrib.models.sam.SamConfig.pretrained">pretrained (kornia.contrib.models.sam.SamConfig attribute)</a>
 </li>
+        <li><a href="image.html#kornia.image.Image.print">print() (kornia.image.Image method)</a>
+</li>
         <li><a href="utils.html#kornia.utils.print_image">print_image() (in module kornia.utils)</a>
 </li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.project">project() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
 
         <ul>
           <li><a href="sensors.camera.html#kornia.sensors.camera.CameraModelBase.project">(kornia.sensors.camera.CameraModelBase method)</a>
+</li>
+          <li><a href="sensors.camera.html#kornia.sensors.camera.projection_model.Z1Projection.project">(kornia.sensors.camera.projection_model.Z1Projection method)</a>
 </li>
         </ul></li>
         <li><a href="geometry.camera.perspective.html#kornia.geometry.camera.perspective.project_points">project_points() (in module kornia.geometry.camera.perspective)</a>
@@ -2309,6 +2326,8 @@
         <ul>
           <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.scale">(kornia.geometry.camera.pinhole.PinholeCamera method)</a>
 </li>
+          <li><a href="sensors.camera.html#kornia.sensors.camera.PinholeModel.scale">(kornia.sensors.camera.PinholeModel method)</a>
+</li>
         </ul></li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.scale_">scale_() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
 </li>
@@ -2362,10 +2381,10 @@
 </li>
         <li><a href="feature.html#kornia.feature.SIFTFeatureScaleSpace">SIFTFeatureScaleSpace (class in kornia.feature)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.transform.html#kornia.geometry.transform.image_registrator.Similarity">Similarity (class in kornia.geometry.transform.image_registrator)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.slerp">slerp() (kornia.geometry.quaternion.Quaternion method)</a>
 </li>
         <li><a href="augmentation.module.html#kornia.augmentation.SmallestMaxSize">SmallestMaxSize (class in kornia.augmentation)</a>
@@ -2388,7 +2407,11 @@
 </li>
         <li><a href="feature.html#kornia.feature.SOLD2_detector">SOLD2_detector (class in kornia.feature)</a>
 </li>
+        <li><a href="geometry.solvers.html#kornia.geometry.solvers.solve_cubic">solve_cubic() (in module kornia.geometry.solvers)</a>
+</li>
         <li><a href="geometry.calibration.html#kornia.geometry.calibration.solve_pnp_dlt">solve_pnp_dlt() (in module kornia.geometry.calibration)</a>
+</li>
+        <li><a href="geometry.solvers.html#kornia.geometry.solvers.solve_quadratic">solve_quadratic() (in module kornia.geometry.solvers)</a>
 </li>
         <li><a href="feature.html#kornia.feature.SOSNet">SOSNet (class in kornia.feature)</a>
 </li>
@@ -2618,6 +2641,8 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="io.html#kornia.io.ImageLoadType.UNCHANGED">UNCHANGED (kornia.io.ImageLoadType attribute)</a>
 </li>
+        <li><a href="sensors.camera.html#kornia.sensors.camera.distortion_model.AffineTransform.undistort">undistort() (kornia.sensors.camera.distortion_model.AffineTransform method)</a>
+</li>
         <li><a href="geometry.calibration.html#kornia.geometry.calibration.undistort_image">undistort_image() (in module kornia.geometry.calibration)</a>
 </li>
         <li><a href="geometry.calibration.html#kornia.geometry.calibration.undistort_points">undistort_points() (in module kornia.geometry.calibration)</a>
@@ -2636,6 +2661,8 @@
 
         <ul>
           <li><a href="sensors.camera.html#kornia.sensors.camera.CameraModelBase.unproject">(kornia.sensors.camera.CameraModelBase method)</a>
+</li>
+          <li><a href="sensors.camera.html#kornia.sensors.camera.projection_model.Z1Projection.unproject">(kornia.sensors.camera.projection_model.Z1Projection method)</a>
 </li>
         </ul></li>
         <li><a href="geometry.camera.perspective.html#kornia.geometry.camera.perspective.unproject_points">unproject_points() (in module kornia.geometry.camera.perspective)</a>
@@ -2820,6 +2847,8 @@
           <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.z">(kornia.geometry.quaternion.Quaternion property)</a>
 </li>
         </ul></li>
+        <li><a href="sensors.camera.html#kornia.sensors.camera.projection_model.Z1Projection">Z1Projection (class in kornia.sensors.camera.projection_model)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="enhance.html#kornia.enhance.zca_mean">zca_mean() (in module kornia.enhance)</a>

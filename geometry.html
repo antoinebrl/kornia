@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="kornia.geometry.bbox" href="geometry.bbox.html" /><link rel="prev" title="kornia.filters" href="filters.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/geometry.html" />
 
-    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
         <title>kornia.geometry - Kornia</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
@@ -218,9 +218,12 @@
 <li class="toctree-l2"><a class="reference internal" href="geometry.epipolar.html">kornia.geometry.epipolar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.homography.html">kornia.geometry.homography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html">kornia.geometry.liegroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-algebra">lie algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-group-and-lie-algebra">lie group and lie algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.linalg.html">kornia.geometry.linalg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.line.html">kornia.geometry.line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.quaternion.html">kornia.geometry.quaternion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.solvers.html">kornia.geometry.solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.subpix.html">kornia.geometry.subpix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.transform.html">kornia.geometry.transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.ransac.html">kornia.geometry.ransac</a></li>
@@ -599,7 +602,9 @@ Here is a simple illustration showing how a 4x4 image is upsampled to 8x8, made 
 <li class="toctree-l2"><a class="reference internal" href="geometry.homography.html#interactive-demo">Interactive Demo</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="geometry.liegroup.html">kornia.geometry.liegroup</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="geometry.liegroup.html">kornia.geometry.liegroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.liegroup.html#lie-algebra">lie algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.liegroup.html#lie-group-and-lie-algebra">lie group and lie algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#kornia.geometry.liegroup.So3"><code class="docutils literal notranslate"><span class="pre">So3</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="geometry.liegroup.html#kornia.geometry.liegroup.So3.__init__"><code class="docutils literal notranslate"><span class="pre">So3.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="geometry.liegroup.html#kornia.geometry.liegroup.So3.__mul__"><code class="docutils literal notranslate"><span class="pre">So3.__mul__()</span></code></a></li>
@@ -751,6 +756,14 @@ Here is a simple illustration showing how a 4x4 image is upsampled to 8x8, made 
 <li class="toctree-l3"><a class="reference internal" href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.x"><code class="docutils literal notranslate"><span class="pre">Quaternion.x</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.y"><code class="docutils literal notranslate"><span class="pre">Quaternion.y</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.z"><code class="docutils literal notranslate"><span class="pre">Quaternion.z</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.solvers.html">kornia.geometry.solvers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geometry.solvers.html#polynomial-solvers">Polynomial Solvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="geometry.solvers.html#kornia.geometry.solvers.solve_quadratic"><code class="docutils literal notranslate"><span class="pre">solve_quadratic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="geometry.solvers.html#kornia.geometry.solvers.solve_cubic"><code class="docutils literal notranslate"><span class="pre">solve_cubic()</span></code></a></li>
 </ul>
 </li>
 </ul>

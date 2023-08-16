@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../../genindex.html" /><link rel="search" title="Search" href="../../../../../search.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/_modules/kornia/augmentation/_2d/mix/jigsaw.html" />
 
-    <link rel="shortcut icon" href="../../../../../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="../../../../../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
         <title>kornia.augmentation._2d.mix.jigsaw - Kornia</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
@@ -217,9 +217,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.epipolar.html">kornia.geometry.epipolar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.homography.html">kornia.geometry.homography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.liegroup.html">kornia.geometry.liegroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.liegroup.html#lie-algebra">lie algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.liegroup.html#lie-group-and-lie-algebra">lie group and lie algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.linalg.html">kornia.geometry.linalg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.line.html">kornia.geometry.line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.quaternion.html">kornia.geometry.quaternion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.solvers.html">kornia.geometry.solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.subpix.html">kornia.geometry.subpix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.transform.html">kornia.geometry.transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../geometry.ransac.html">kornia.geometry.ransac</a></li>
@@ -334,7 +337,7 @@
 <div class="viewcode-block" id="RandomJigsaw"><a class="viewcode-back" href="../../../../../augmentation.module.html#kornia.augmentation.RandomJigsaw">[docs]</a><span class="k">class</span> <span class="nc">RandomJigsaw</span><span class="p">(</span><span class="n">MixAugmentationBaseV2</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;RandomJigsaw augmentation.</span>
 
-<span class="sd">    .. image:: https://raw.githubusercontent.com/kornia/data/main/random_jigsaw.png</span>
+<span class="sd">    .. image:: _static/img/RandomJigsaw.png</span>
 
 <span class="sd">    Make Jigsaw puzzles for each image individually. To mix with different images in a</span>
 <span class="sd">    batch, referring to :class:`kornia.augmentation.RandomMosic`.</span>
@@ -382,11 +385,14 @@
 
         <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">perm</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;permutation&quot;</span><span class="p">]</span>
+        <span class="c1"># Note: with a 100x100 image and a grid size of 3x3, it could work if</span>
+        <span class="c1">#       we make h = piece_size_h * self.flags[&quot;grid&quot;][0] with one pixel loss, then resize to 100 x 100.</span>
+        <span class="c1">#       Probably worth to check if we should tolerate such &quot;errorness&quot; or to raise it as an error.</span>
         <span class="n">piece_size_h</span><span class="p">,</span> <span class="n">piece_size_w</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
         <span class="c1"># Convert to C BxN H&#39; W&#39;</span>
         <span class="nb">input</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">input</span><span class="o">.</span><span class="n">unfold</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">piece_size_h</span><span class="p">,</span> <span class="n">piece_size_w</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">unfold</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">piece_size_h</span><span class="p">,</span> <span class="n">piece_size_w</span><span class="p">)</span>
+            <span class="nb">input</span><span class="o">.</span><span class="n">unfold</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">piece_size_h</span><span class="p">,</span> <span class="n">piece_size_h</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">unfold</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">piece_size_w</span><span class="p">,</span> <span class="n">piece_size_w</span><span class="p">)</span>
             <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">piece_size_h</span><span class="p">,</span> <span class="n">piece_size_w</span><span class="p">)</span>
             <span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
             <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">piece_size_h</span><span class="p">,</span> <span class="n">piece_size_w</span><span class="p">)</span>
@@ -396,7 +402,7 @@
         <span class="nb">input</span> <span class="o">=</span> <span class="p">(</span>
             <span class="nb">input</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">piece_size_w</span><span class="p">)</span>
             <span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
             <span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
             <span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
         <span class="p">)</span>

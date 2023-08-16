@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="kornia.losses" href="losses.html" /><link rel="prev" title="kornia.io" href="io.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/image.html" />
 
-    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
         <title>kornia.image - Kornia</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
@@ -218,9 +218,12 @@
 <li class="toctree-l2"><a class="reference internal" href="geometry.epipolar.html">kornia.geometry.epipolar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.homography.html">kornia.geometry.homography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html">kornia.geometry.liegroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-algebra">lie algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.liegroup.html#lie-group-and-lie-algebra">lie group and lie algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.linalg.html">kornia.geometry.linalg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.line.html">kornia.geometry.line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.quaternion.html">kornia.geometry.quaternion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.solvers.html">kornia.geometry.solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.subpix.html">kornia.geometry.subpix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.transform.html">kornia.geometry.transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.ransac.html">kornia.geometry.ransac</a></li>
@@ -504,7 +507,8 @@ polymorphic behaviours.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kornia.image.Image.clone">
 <span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/image/image.html#Image.clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.image.Image.clone" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return a copy of the image.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#kornia.image.Image" title="kornia.image.image.Image"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a></p>
 </dd>
@@ -624,6 +628,26 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Colo
 <dd><p>Return the pixel format.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.image.Image.print">
+<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/image/image.html#Image.print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.image.Image.print" title="Permalink to this definition">#</a></dt>
+<dd><p>Print the image tensor to the console.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>max_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>optional</em>) – the maximum width of the image to print.
+Default:  <code class="code docutils literal notranslate"><span class="pre">256</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;panda.png&quot;</span><span class="p">)</span>
+<span class="n">img</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="https://github.com/kornia/data/blob/main/print_image.png?raw=true" src="https://github.com/kornia/data/blob/main/print_image.png?raw=true" />
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="kornia.image.Image.shape">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#kornia.image.Image.shape" title="Permalink to this definition">#</a></dt>
@@ -633,9 +657,21 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Colo
 <dl class="py method">
 <dt class="sig sig-object py" id="kornia.image.Image.to">
 <span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/image/image.html#Image.to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.image.Image.to" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Move the image to the given device and dtype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">device</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>], <em>optional</em>) – the device to move the image to.
+Default:  <code class="code docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>dtype</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.dtype" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>], <em>optional</em>) – the data type to cast the image to.
+Default:  <code class="code docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the image moved to the given device and dtype.</p>
+</dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#kornia.image.Image" title="kornia.image.image.Image"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a></p>
+<dd class="field-odd"><p><a class="reference internal" href="#kornia.image.Image" title="kornia.image.Image">Image</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -796,6 +832,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Colo
 <li><a class="reference internal" href="#kornia.image.Image.image_size"><code class="docutils literal notranslate"><span class="pre">Image.image_size</span></code></a></li>
 <li><a class="reference internal" href="#kornia.image.Image.layout"><code class="docutils literal notranslate"><span class="pre">Image.layout</span></code></a></li>
 <li><a class="reference internal" href="#kornia.image.Image.pixel_format"><code class="docutils literal notranslate"><span class="pre">Image.pixel_format</span></code></a></li>
+<li><a class="reference internal" href="#kornia.image.Image.print"><code class="docutils literal notranslate"><span class="pre">Image.print()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.image.Image.shape"><code class="docutils literal notranslate"><span class="pre">Image.shape</span></code></a></li>
 <li><a class="reference internal" href="#kornia.image.Image.to"><code class="docutils literal notranslate"><span class="pre">Image.to()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.image.Image.to_color_space"><code class="docutils literal notranslate"><span class="pre">Image.to_color_space()</span></code></a></li>

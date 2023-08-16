@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="kornia.geometry.linalg" href="geometry.linalg.html" /><link rel="prev" title="kornia.geometry.homography" href="geometry.homography.html" />
         <link rel="canonical" href="https://kornia.readthedocs.io/geometry.liegroup.html" />
 
-    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
         <title>kornia.geometry.liegroup - Kornia</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
@@ -153,7 +153,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -218,9 +218,12 @@
 <li class="toctree-l2"><a class="reference internal" href="geometry.epipolar.html">kornia.geometry.epipolar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.homography.html">kornia.geometry.homography</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">kornia.geometry.liegroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lie-algebra">lie algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lie-group-and-lie-algebra">lie group and lie algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.linalg.html">kornia.geometry.linalg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.line.html">kornia.geometry.line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.quaternion.html">kornia.geometry.quaternion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.solvers.html">kornia.geometry.solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.subpix.html">kornia.geometry.subpix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.transform.html">kornia.geometry.transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.ransac.html">kornia.geometry.ransac</a></li>
@@ -314,7 +317,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -322,6 +325,35 @@
         <article role="main">
           <section id="kornia-geometry-liegroup">
 <h1>kornia.geometry.liegroup<a class="headerlink" href="#kornia-geometry-liegroup" title="Permalink to this heading">#</a></h1>
+<p>The Lie group encompasses the concepts of <cite>group</cite> and <cite>smooth manifold</cite> in a unique body.</p>
+<p>A group is a non-empty set with an operation that satisfies the following constraints: the operation is associative, has an identity element,
+and every element of the set has an inverse element.</p>
+<p>See more: <a class="reference external" href="https://en.wikipedia.org/wiki/Group_(mathematics)">Group</a></p>
+<p>A Lie group <span class="math notranslate nohighlight">\(G\)</span> is a smooth manifold whose elements satisfy the group axioms.You can visualize the idea of manifold like a curved, smooth (hyper)-surface, with no edges or
+spikes, embedded in a space of higher dimension.</p>
+<p>See more: <a class="reference external" href="https://en.wikipedia.org/wiki/Manifold">Manifold</a></p>
+<p>In robotics, we say that our state vector evolves on this surface, that is, the manifold describes or is defined by the constraints imposed on
+the state.</p>
+</section>
+<section id="lie-algebra">
+<h1>lie algebra<a class="headerlink" href="#lie-algebra" title="Permalink to this heading">#</a></h1>
+<img alt="_images/lie.png" src="_images/lie.png" />
+<p>If <span class="math notranslate nohighlight">\(M\)</span> is the manifold that represents a lie group, the tangent space at the identity is called the Lie algebra of <span class="math notranslate nohighlight">\(M\)</span>.
+The Lie algebra <span class="math notranslate nohighlight">\(m\)</span> is a vector space. As such, its elements can be identified with vectors in <span class="math notranslate nohighlight">\(R^d\)</span>, whose
+dimension <span class="math notranslate nohighlight">\(d\)</span> is the number of degrees of freedom of <span class="math notranslate nohighlight">\(M\)</span>. For example <span class="math notranslate nohighlight">\(d\)</span> would be 3 in the case of lie group <span class="math notranslate nohighlight">\(SO3\)</span></p>
+</section>
+<section id="lie-group-and-lie-algebra">
+<h1>lie group and lie algebra<a class="headerlink" href="#lie-group-and-lie-algebra" title="Permalink to this heading">#</a></h1>
+<p>Every Lie group has an associated Lie algebra. We relate the
+Lie group with its Lie algebra through the following facts</p>
+<ol class="arabic simple">
+<li><p>The Lie algebra <span class="math notranslate nohighlight">\(m\)</span> is a vector space. As such, its elements can be identified with vectors in <span class="math notranslate nohighlight">\(R^d\)</span>, whose
+dimension <span class="math notranslate nohighlight">\(d\)</span> is the number of degrees of freedom of <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+<li><p>The exponential map, <cite>exp</cite> : <span class="math notranslate nohighlight">\(m\)</span> → <span class="math notranslate nohighlight">\(M\)</span>, exactly converts elements of the Lie algebra into elements of the group.
+The <cite>log</cite> map is the inverse operation.</p></li>
+</ol>
+<img alt="_images/lie_ops.png" src="_images/lie_ops.png" />
+<p>Reference: <a class="reference external" href="https://arxiv.org/pdf/1812.01537.pdf">Micro lie theory</a></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="kornia.geometry.liegroup.So3">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.geometry.liegroup.</span></span><span class="sig-name descname"><span class="pre">So3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/geometry/liegroup/so3.html#So3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.geometry.liegroup.So3" title="Permalink to this definition">#</a></dt>
@@ -1835,118 +1867,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">kornia.geometry.liegroup</a><ul>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3"><code class="docutils literal notranslate"><span class="pre">So3</span></code></a><ul>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.__init__"><code class="docutils literal notranslate"><span class="pre">So3.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.__mul__"><code class="docutils literal notranslate"><span class="pre">So3.__mul__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.__repr__"><code class="docutils literal notranslate"><span class="pre">So3.__repr__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.adjoint"><code class="docutils literal notranslate"><span class="pre">So3.adjoint()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.exp"><code class="docutils literal notranslate"><span class="pre">So3.exp()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.from_matrix"><code class="docutils literal notranslate"><span class="pre">So3.from_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.from_wxyz"><code class="docutils literal notranslate"><span class="pre">So3.from_wxyz()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.hat"><code class="docutils literal notranslate"><span class="pre">So3.hat()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.identity"><code class="docutils literal notranslate"><span class="pre">So3.identity()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.inverse"><code class="docutils literal notranslate"><span class="pre">So3.inverse()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.log"><code class="docutils literal notranslate"><span class="pre">So3.log()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.matrix"><code class="docutils literal notranslate"><span class="pre">So3.matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.q"><code class="docutils literal notranslate"><span class="pre">So3.q</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.random"><code class="docutils literal notranslate"><span class="pre">So3.random()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.rot_x"><code class="docutils literal notranslate"><span class="pre">So3.rot_x()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.rot_y"><code class="docutils literal notranslate"><span class="pre">So3.rot_y()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.rot_z"><code class="docutils literal notranslate"><span class="pre">So3.rot_z()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So3.vee"><code class="docutils literal notranslate"><span class="pre">So3.vee()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3"><code class="docutils literal notranslate"><span class="pre">Se3</span></code></a><ul>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.__init__"><code class="docutils literal notranslate"><span class="pre">Se3.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.__mul__"><code class="docutils literal notranslate"><span class="pre">Se3.__mul__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.__repr__"><code class="docutils literal notranslate"><span class="pre">Se3.__repr__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.adjoint"><code class="docutils literal notranslate"><span class="pre">Se3.adjoint()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.exp"><code class="docutils literal notranslate"><span class="pre">Se3.exp()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.from_matrix"><code class="docutils literal notranslate"><span class="pre">Se3.from_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.from_qxyz"><code class="docutils literal notranslate"><span class="pre">Se3.from_qxyz()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.hat"><code class="docutils literal notranslate"><span class="pre">Se3.hat()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.identity"><code class="docutils literal notranslate"><span class="pre">Se3.identity()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.inverse"><code class="docutils literal notranslate"><span class="pre">Se3.inverse()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.log"><code class="docutils literal notranslate"><span class="pre">Se3.log()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.matrix"><code class="docutils literal notranslate"><span class="pre">Se3.matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.quaternion"><code class="docutils literal notranslate"><span class="pre">Se3.quaternion</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.r"><code class="docutils literal notranslate"><span class="pre">Se3.r</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.random"><code class="docutils literal notranslate"><span class="pre">Se3.random()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.rot_x"><code class="docutils literal notranslate"><span class="pre">Se3.rot_x()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.rot_y"><code class="docutils literal notranslate"><span class="pre">Se3.rot_y()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.rot_z"><code class="docutils literal notranslate"><span class="pre">Se3.rot_z()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.rotation"><code class="docutils literal notranslate"><span class="pre">Se3.rotation</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.so3"><code class="docutils literal notranslate"><span class="pre">Se3.so3</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.t"><code class="docutils literal notranslate"><span class="pre">Se3.t</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.trans"><code class="docutils literal notranslate"><span class="pre">Se3.trans()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.trans_x"><code class="docutils literal notranslate"><span class="pre">Se3.trans_x()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.trans_y"><code class="docutils literal notranslate"><span class="pre">Se3.trans_y()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.trans_z"><code class="docutils literal notranslate"><span class="pre">Se3.trans_z()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.translation"><code class="docutils literal notranslate"><span class="pre">Se3.translation</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se3.vee"><code class="docutils literal notranslate"><span class="pre">Se3.vee()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2"><code class="docutils literal notranslate"><span class="pre">So2</span></code></a><ul>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.__init__"><code class="docutils literal notranslate"><span class="pre">So2.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.__mul__"><code class="docutils literal notranslate"><span class="pre">So2.__mul__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.__repr__"><code class="docutils literal notranslate"><span class="pre">So2.__repr__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.adjoint"><code class="docutils literal notranslate"><span class="pre">So2.adjoint()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.exp"><code class="docutils literal notranslate"><span class="pre">So2.exp()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.from_matrix"><code class="docutils literal notranslate"><span class="pre">So2.from_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.hat"><code class="docutils literal notranslate"><span class="pre">So2.hat()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.identity"><code class="docutils literal notranslate"><span class="pre">So2.identity()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.inverse"><code class="docutils literal notranslate"><span class="pre">So2.inverse()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.log"><code class="docutils literal notranslate"><span class="pre">So2.log()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.matrix"><code class="docutils literal notranslate"><span class="pre">So2.matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.random"><code class="docutils literal notranslate"><span class="pre">So2.random()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.vee"><code class="docutils literal notranslate"><span class="pre">So2.vee()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.So2.z"><code class="docutils literal notranslate"><span class="pre">So2.z</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2"><code class="docutils literal notranslate"><span class="pre">Se2</span></code></a><ul>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.__init__"><code class="docutils literal notranslate"><span class="pre">Se2.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.__mul__"><code class="docutils literal notranslate"><span class="pre">Se2.__mul__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.__repr__"><code class="docutils literal notranslate"><span class="pre">Se2.__repr__()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.adjoint"><code class="docutils literal notranslate"><span class="pre">Se2.adjoint()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.exp"><code class="docutils literal notranslate"><span class="pre">Se2.exp()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.from_matrix"><code class="docutils literal notranslate"><span class="pre">Se2.from_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.hat"><code class="docutils literal notranslate"><span class="pre">Se2.hat()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.identity"><code class="docutils literal notranslate"><span class="pre">Se2.identity()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.inverse"><code class="docutils literal notranslate"><span class="pre">Se2.inverse()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.log"><code class="docutils literal notranslate"><span class="pre">Se2.log()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.matrix"><code class="docutils literal notranslate"><span class="pre">Se2.matrix()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.r"><code class="docutils literal notranslate"><span class="pre">Se2.r</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.random"><code class="docutils literal notranslate"><span class="pre">Se2.random()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.rotation"><code class="docutils literal notranslate"><span class="pre">Se2.rotation</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.so2"><code class="docutils literal notranslate"><span class="pre">Se2.so2</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.t"><code class="docutils literal notranslate"><span class="pre">Se2.t</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.trans"><code class="docutils literal notranslate"><span class="pre">Se2.trans()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.trans_x"><code class="docutils literal notranslate"><span class="pre">Se2.trans_x()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.trans_y"><code class="docutils literal notranslate"><span class="pre">Se2.trans_y()</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.translation"><code class="docutils literal notranslate"><span class="pre">Se2.translation</span></code></a></li>
-<li><a class="reference internal" href="#kornia.geometry.liegroup.Se2.vee"><code class="docutils literal notranslate"><span class="pre">Se2.vee()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

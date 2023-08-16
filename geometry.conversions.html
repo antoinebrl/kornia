@@ -918,6 +918,41 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">1.0e
 </dd></dl>
 
 </section>
+<section id="vector">
+<h2>Vector<a class="headerlink" href="#vector" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="kornia.geometry.conversions.vector_to_skew_symmetric_matrix">
+<span class="sig-prename descclassname"><span class="pre">kornia.geometry.conversions.</span></span><span class="sig-name descname"><span class="pre">vector_to_skew_symmetric_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/geometry/conversions.html#vector_to_skew_symmetric_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.geometry.conversions.vector_to_skew_symmetric_matrix" title="Permalink to this definition">#</a></dt>
+<dd><p>Converts a vector to a skew symmetric matrix.</p>
+<p>A vector <span class="math notranslate nohighlight">\((v1, v2, v3)\)</span> has a corresponding skew-symmetric matrix, which is of the form:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} 0 &amp; -v3 &amp; v2 \\
+v3 &amp; 0 &amp; -v1 \\
+-v2 &amp; v1 &amp; 0\end{bmatrix}\end{split}\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – tensor of shape <span class="math notranslate nohighlight">\((B, 3)\)</span>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor of shape <span class="math notranslate nohighlight">\((B, 3, 3)\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vector_to_skew_symmetric_matrix</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="go">tensor([[ 0., -3.,  2.],</span>
+<span class="go">        [ 3.,  0., -1.],</span>
+<span class="go">        [-2.,  1.,  0.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
 <section id="rotation-matrix">
 <h2>Rotation Matrix<a class="headerlink" href="#rotation-matrix" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
@@ -1460,6 +1495,10 @@ tvec: translation vector <span class="math notranslate nohighlight">\((B, 3, 1)\
 <li><a class="reference internal" href="#kornia.geometry.conversions.quaternion_log_to_exp"><code class="docutils literal notranslate"><span class="pre">quaternion_log_to_exp()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.geometry.conversions.quaternion_exp_to_log"><code class="docutils literal notranslate"><span class="pre">quaternion_exp_to_log()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.geometry.conversions.normalize_quaternion"><code class="docutils literal notranslate"><span class="pre">normalize_quaternion()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vector">Vector</a><ul>
+<li><a class="reference internal" href="#kornia.geometry.conversions.vector_to_skew_symmetric_matrix"><code class="docutils literal notranslate"><span class="pre">vector_to_skew_symmetric_matrix()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#rotation-matrix">Rotation Matrix</a><ul>

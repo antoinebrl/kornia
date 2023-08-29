@@ -389,12 +389,12 @@
         <span class="c1"># Ensure correct shapes</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rectified_left_camera</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Expected &#39;rectified_left_camera&#39; to have 3 dimensions. &quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">rectified_left_camera</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected &#39;rectified_left_camera&#39; to have 3 dimensions. Got </span><span class="si">{</span><span class="n">rectified_left_camera</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rectified_right_camera</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Expected &#39;rectified_right_camera&#39; to have 3 dimension. &quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">rectified_right_camera</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected &#39;rectified_right_camera&#39; to have 3 dimension. Got </span><span class="si">{</span><span class="n">rectified_right_camera</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">rectified_left_camera</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
@@ -436,7 +436,7 @@
         <span class="c1"># Ensure that tx * fx is negative and exists.</span>
         <span class="n">tx_fx</span> <span class="o">=</span> <span class="n">rectified_right_camera</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">tx_fx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected :math:`T_x * f_x` to be negative.&quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">tx_fx</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected :math:`T_x * f_x` to be negative. Got </span><span class="si">{</span><span class="n">tx_fx</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">batch_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -568,7 +568,7 @@
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">disparity_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected &#39;disparity_tensor&#39; to have 4 dimensions.&quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">disparity_tensor</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected &#39;disparity_tensor&#39; to have 4 dimensions. Got </span><span class="si">{</span><span class="n">disparity_tensor</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">disparity_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span>
@@ -593,16 +593,14 @@
         <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected &#39;Q_matrix&#39; to be an instance of Tensor but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">Q_matrix</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">Q_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected &#39;Q_matrix&#39; to have 3 dimensions.&quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">Q_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected &#39;Q_matrix&#39; to have 3 dimensions. Got </span><span class="si">{</span><span class="n">Q_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">Q_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Expected last two dimensions of &#39;Q_matrix&#39; to be of shape (4, 4).&quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">Q_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected last two dimensions of &#39;Q_matrix&#39; to be of shape (4, 4). Got </span><span class="si">{</span><span class="n">Q_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">Q_matrix</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">StereoException</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Expected &#39;Q_matrix&#39; to be of type torch.float16, torch.float32 or torch.float64.&quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">Q_matrix</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected &#39;Q_matrix&#39; to be of type torch.float16, torch.float32 or torch.float64. Got </span><span class="si">{</span><span class="n">Q_matrix</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
 

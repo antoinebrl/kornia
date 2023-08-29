@@ -442,7 +442,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">replace_stride_with_dilation</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;replace_stride_with_dilation should be None &quot;</span>
-                <span class="s2">&quot;or a 3-element tuple, got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">replace_stride_with_dilation</span><span class="p">)</span>
+                <span class="sa">f</span><span class="s2">&quot;or a 3-element tuple, got </span><span class="si">{</span><span class="n">replace_stride_with_dilation</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">groups</span> <span class="o">=</span> <span class="n">groups</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_width</span> <span class="o">=</span> <span class="n">width_per_group</span>

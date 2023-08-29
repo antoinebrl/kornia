@@ -470,7 +470,7 @@
             <span class="sa">f</span><span class="s2">&quot;of torch.Tensor. Type of weights is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">svd_eps</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">svd_eps</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type of svd_eps is not float. Got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">svd_eps</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">accepted_dtypes</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -510,7 +510,7 @@
 
     <span class="k">if</span> <span class="n">world_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;At least 6 points are required to use this function. &quot;</span> <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">world_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> points.&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;At least 6 points are required to use this function. Got </span><span class="si">{</span><span class="n">world_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> points.&quot;</span>
         <span class="p">)</span>
 
     <span class="n">B</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">world_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
